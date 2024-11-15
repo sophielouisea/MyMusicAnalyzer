@@ -1,4 +1,4 @@
-# My Music Analyzer
+# MyMusicAnalyzer
 
 ## Stack:
 
