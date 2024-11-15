@@ -5,7 +5,8 @@ description = "API for the MyMusicAnalyzer app"
 authors = ["sophielouisea"]
 readme = "README.md"
 packages = [
-  {include = "./backend/src/*"}
+  {include = "routers", from="./backend/src/"},
+  {include = "utils", from="./backend/src/"},
 ]
 
 [tool.poetry.dependencies]
