@@ -9,7 +9,6 @@ export default defineConfig(({ mode }) => {
     define: {
       "process.env.SOME_KEY": JSON.stringify(env.SOME_KEY),
     },
-    base: "/",
     plugins: [react(), tsconfigPaths],
     build: {
       outDir: "dist/",
