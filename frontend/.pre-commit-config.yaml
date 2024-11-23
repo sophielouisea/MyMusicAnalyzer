@@ -5,4 +5,4 @@ repos:
         name: yarn-checks
         entry: yarn checks
         language: system
-        files: "./frontend/.*"
+        files: "./.*"

@@ -1,5 +1,1 @@
-describe("Header", () => {
-  test("is true", () => {
-    expect(true).toBe(true);
-  });
-});
+describe("Header", () => { test("expect true is true", () => { expect(true).toBe(true); }); });
