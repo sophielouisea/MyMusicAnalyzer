@@ -1,0 +1,1 @@
+{"root":["./src/main.tsx","./src/types.ts","./src/vite-env.d.ts","./src/components/app/app.test.tsx","./src/components/app/app.tsx","./src/components/header/header.test.tsx","./src/components/header/header.tsx","./src/components/topartists/topartists.test.tsx","./src/components/topartists/topartists.tsx","./vitest-utils.ts"],"version":"5.6.3"}

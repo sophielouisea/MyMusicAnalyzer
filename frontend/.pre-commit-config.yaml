@@ -1,0 +1,8 @@
+repos:
+  - repo: local
+    hooks:
+      - id: yarn-checks
+        name: yarn-checks
+        entry: yarn checks
+        language: system
+        files: "./frontend/.*"
