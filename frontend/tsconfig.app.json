@@ -25,5 +25,11 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "vitest-utils.ts"]
+  "include": [
+    "src",
+    "vitest-utils.ts",
+    "arch/App",
+    "arch/Header",
+    "arch/TopArtists"
+  ]
 }
