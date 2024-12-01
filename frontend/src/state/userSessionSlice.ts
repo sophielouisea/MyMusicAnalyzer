@@ -16,10 +16,18 @@ const initialState: SliceInitialState = {
   data: initialUserData
 }
 
-export const checkValidToken = createAsyncThunk(
+export const checkHasValidToken = createAsyncThunk(
   "userSessionSlice/checkValidToken",
   async () => {
+    console.log("Checking for tokens...")
+    const token = await window.localStorage.getItem("spotifyToken");
 
+    const tokenExpiry = await window.localStorage.getItem("spotifyTokenExpiry");
+    //  && tokenExpiry && Number(tokenExpiry) > Date.now()
+    if (token) {
+      return true;
+    }
+    return false;
   }
 )
 
@@ -33,13 +41,9 @@ export const authorizeSpotifySession = createAsyncThunk(
 export const userSessionSlice = createSlice({
   name: "userSessionSlice",
   initialState: initialState,
-  reducers: {
-    setHasValidToken: (state): void => {
-      state.data.hasValidToken = true;
-    }
-  },
+  reducers: {},
   extraReducers: () => {}
 });
 
-export const { setHasValidToken } = userSessionSlice.actions;
+export const { checkHasValidToken } = userSessionSlice.actions;
 export default userSessionSlice.reducer;
