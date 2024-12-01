@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "checks": "tsc -b && vitest run && yarn prettier . --write",
-    "build": "yarn checks && vite build",
+    "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest"
