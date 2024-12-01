@@ -22,7 +22,7 @@ const generateRandomString = (length: number) => {
   return text;
 }
 
-const Loading = () => {
+const Login = () => {
   useEffect(() => {
     redirectToSpotifyAuth();
   }, []);
@@ -30,4 +30,4 @@ const Loading = () => {
   return <div>Loading... Redirecting to Spotify for login...</div>;
 };
 
-export default Loading;
+export default Login;

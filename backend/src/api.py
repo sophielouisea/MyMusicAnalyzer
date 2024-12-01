@@ -3,6 +3,7 @@ from fastapi import FastAPI, responses
 from fastapi.middleware.cors import CORSMiddleware
 
 from routers.artists import router as artists_router
+from routers.auth import router as auth_router
 from routers.genres import router as genres_router
 from routers.tracks import router as tracks_router
 from routers.trends import router as trends_router
@@ -29,3 +30,4 @@ api.include_router(router=artists_router)
 api.include_router(router=genres_router)
 api.include_router(router=tracks_router)
 api.include_router(router=trends_router)
+api.include_router(router=auth_router)

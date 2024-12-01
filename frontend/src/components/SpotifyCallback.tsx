@@ -21,11 +21,11 @@ const SpotifyCallback = () => {
         .then(data => {
           localStorage.setItem('spotifyToken', data.access_token);
           localStorage.setItem('spotifyTokenExpiry', data.expires_at);
-          navigate('/');
+          //navigate('/');
         })
         .catch(error => console.error('Error exchanging code:', error));
     }
-  }, [navigate]);
+  }, []);
 
   return <div>Loading...</div>;
 };
