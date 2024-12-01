@@ -257,3 +257,6 @@ Thumbs.db
 
 .notes/*
 .vscode
+
+# Local Netlify folder
+.netlify
