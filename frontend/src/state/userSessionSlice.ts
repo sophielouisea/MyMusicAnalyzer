@@ -23,6 +23,7 @@ export const checkHasValidToken = createAsyncThunk(
     const token = await window.localStorage.getItem("spotifyToken");
 
     const tokenExpiry = await window.localStorage.getItem("spotifyTokenExpiry");
+
     //  && tokenExpiry && Number(tokenExpiry) > Date.now()
     if (token) {
       return true;
@@ -42,8 +43,10 @@ export const userSessionSlice = createSlice({
   name: "userSessionSlice",
   initialState: initialState,
   reducers: {},
-  extraReducers: () => {}
+  extraReducers: (builder) => {
+    builder.addCase(checkHasValidToken.pending,)
+  }
 });
 
-export const { checkHasValidToken } = userSessionSlice.actions;
+export const { } = userSessionSlice.actions;
 export default userSessionSlice.reducer;
