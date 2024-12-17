@@ -1,9 +1,9 @@
 export interface UserSession {
   [key: string]: string | boolean | undefined;
   hasValidToken?: boolean;
+  isAuthenticated?: boolean;
   userName?: string;
   userEmail?: string;
-  token?: string;
   hasTrends?: boolean;
 }
 
@@ -22,4 +22,9 @@ export interface SliceInitialState {
   requestSuccess?: boolean;
   requestError?: boolean;
   data: UserSession | ModalViews;
+}
+
+export interface TopArtists {
+  [key: string]: string
+  name: string
 }

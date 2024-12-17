@@ -1,11 +1,15 @@
-import os
-from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel
-import requests
 import base64
 from datetime import datetime, timedelta
+import os
+import requests
+from typing import Annotated
 
-router = APIRouter(prefix="/auth", tags=["Authorization"])
+from fastapi import APIRouter, Header, HTTPException, Response, status
+from pydantic import BaseModel
+
+from utils.spotify_handler import SpotifyHandler
+
+router = APIRouter(prefix="/user", tags=["User"])
 
 @router.get("/ping")
 def auth_ping():
@@ -15,7 +19,7 @@ def auth_ping():
 class SpotifyCallbackRequest(BaseModel):
     code: str
 
-@router.post("/")
+@router.post("/auth")
 def auth(request: SpotifyCallbackRequest):
     print("Requesting https://accounts.spotify.com/api/token...")
 
@@ -29,8 +33,8 @@ def auth(request: SpotifyCallbackRequest):
     sample_string_bytes = authorization.encode("ascii")
     base64_bytes = base64.b64encode(sample_string_bytes)
     base64_string = base64_bytes.decode("ascii")
-    current_time = datetime.now() + timedelta(hours=1)
-    current_timestamp = str(int(current_time.timestamp()))
+    expires_time = datetime.now() + timedelta(hours=1)
+    expires_timestamp = str(int(expires_time.timestamp()))
     print(data)
 
     headers = {
@@ -46,7 +50,13 @@ def auth(request: SpotifyCallbackRequest):
         )
 
     token_info = response.json()
-    token_info["expires_at"] = current_timestamp
+    token_info["expires_at"] = expires_timestamp
     print(token_info)
 
     return token_info
+
+@router.get("/details")
+def user_details(token: Annotated[str | None, Header()], response: Response):
+    spotify = SpotifyHandler(token)
+    response = spotify.get_user_details()
+    return response

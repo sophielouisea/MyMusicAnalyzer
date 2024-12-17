@@ -5,9 +5,16 @@ class SpotifyHandler:
     def __init__(self, token: str):
         self._token = token
 
+    def authenticate(self):
+        raise NotImplementedError()
+
     def get_top_artists(self):
         response = self._get("me/top/artists")
         return self.format_items(response)
+
+    def get_user_details(self):
+        response = self._get("me")
+        return response
 
     def _check_token(self):
         raise NotImplementedError()
