@@ -22,9 +22,10 @@ const SpotifyCallback = () => {
       })
         .then(response => response.json())
         .then(data => {
+          console.log("Received data:", data)
           if (data.access_token) {
             localStorage.setItem('spotifyToken', data.access_token);
-            localStorage.setItem('spotifyTokenExpiry', data);
+            localStorage.setItem('spotifyTokenExpiry', data.expires_at);
           }
           //navigate('/');
         })

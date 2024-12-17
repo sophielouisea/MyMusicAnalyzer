@@ -49,4 +49,4 @@ def auth(request: SpotifyCallbackRequest):
     token_info["expires_at"] = current_timestamp
     print(token_info)
 
-    return response.json()
+    return token_info

@@ -24,9 +24,9 @@ export const checkHasValidToken = createAsyncThunk(
     const token = await window.localStorage.getItem("spotifyToken");
 
     const tokenExpiry = await window.localStorage.getItem("spotifyTokenExpiry");
+    const validToken = token && tokenExpiry && (Number(tokenExpiry) > Date.now());
 
-    //  && tokenExpiry && Number(tokenExpiry) > Date.now()
-    if (token) {
+    if (validToken) {
       console.log("Token found. Expires:", JSON.stringify(tokenExpiry))
       return true;
     }
