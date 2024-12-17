@@ -96,7 +96,6 @@ export const getUserDetails = createAsyncThunk(
       console.log("No token found.")
       return rejectWithValue("No token was found.")
     }
-
   }
 )
 

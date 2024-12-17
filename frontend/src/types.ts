@@ -17,14 +17,30 @@ export interface ModalViews {
 }
 
 export interface SliceInitialState {
-  [key: string]: string | boolean | undefined | UserSession | ModalViews;
+  [key: string]: string | boolean | undefined | UserSession | ModalViews | ArtistItem[];
   isLoading: boolean;
   requestSuccess?: boolean;
   requestError?: boolean;
-  data: UserSession | ModalViews;
+  data: UserSession | ModalViews | ArtistItem[];
 }
 
 export interface TopArtists {
   [key: string]: string
   name: string
+}
+
+export interface SpotifyItem {
+  [key: string]: string | ArtistItem
+  type: string
+  item: ArtistItem
+}
+
+export interface ArtistItem {
+  [key: string]: string | number | string[]
+  id: string
+  name: string
+  popularity: number
+  image: string
+  personal_ranking: number
+  genres: string[]
 }

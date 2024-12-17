@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Card from "./Card";
 import { ScrollPanel } from "primereact/scrollpanel";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/state/store";
+import { getTopArtists } from "@/state/artistsSlice";
 
 const MainContent = (): React.JSX.Element => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(getTopArtists());
+  }, [])
+
   return (
     <div className="main-content">
       <ScrollPanel style={{ width: "80rem", height: "52rem" }}>
