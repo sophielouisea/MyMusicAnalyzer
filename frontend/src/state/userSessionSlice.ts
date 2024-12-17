@@ -71,12 +71,30 @@ export const authenticateUser = createAsyncThunk(
 
 export const getUserDetails = createAsyncThunk(
   "userSessionSlice/getUserDetails",
-  async () => {
+  async (arg, {rejectWithValue}) => {
     console.log("Getting user details...")
     const token = await window.localStorage.getItem("spotifyToken");
     if (token) {
-      const endpoint = apiUrl + "user/details";
+      const requestConfig = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          token: token,
+        },
+      }
 
+      try {
+        const response = await fetch(apiUrl + "user/details", requestConfig);
+        if (response.ok) {
+          return response.json();
+        }
+      } catch (error) {
+        console.log("Error getting user details:", error)
+        return rejectWithValue(error);
+      }
+    } else {
+      console.log("No token found.")
+      return rejectWithValue("No token was found.")
     }
 
   }
@@ -117,6 +135,20 @@ export const userSessionSlice = createSlice({
 
     builder.addCase(checkHasValidToken.rejected, (state) => {
       setRejected(state, "checkHasValidToken");
+    });
+
+    builder.addCase(getUserDetails.pending, (state) => {
+      setPending(state, "getUserDetails");
+    });
+
+    builder.addCase(getUserDetails.fulfilled, (state, action) => {
+      setFulfilled(state, "getUserDetails");
+      state.data.userEmail = action?.payload.email;
+      state.data.userName = action?.payload.display_name;
+    });
+
+    builder.addCase(getUserDetails.rejected, (state) => {
+      setRejected(state, "getUserDetails");
     });
   },
 });
