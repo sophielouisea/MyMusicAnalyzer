@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { SliceInitialState, UserSession } from "@/types";
+import { setFulfilled, setPending, setRejected } from "./utils";
 
 const initialUserData: UserSession = {
   hasValidToken: undefined,
@@ -26,6 +27,7 @@ export const checkHasValidToken = createAsyncThunk(
 
     //  && tokenExpiry && Number(tokenExpiry) > Date.now()
     if (token) {
+      console.log("Token found. Expires:", JSON.stringify(tokenExpiry))
       return true;
     }
     return false;
@@ -42,9 +44,24 @@ export const authorizeSpotifySession = createAsyncThunk(
 export const userSessionSlice = createSlice({
   name: "userSessionSlice",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    setUserData: (state): void => {
+      state.data.token = window.localStorage.getItem("spotifyToken") || "";
+    }
+  },
   extraReducers: (builder) => {
-    builder.addCase(checkHasValidToken.pending,)
+    builder.addCase(checkHasValidToken.pending, (state) => {
+      setPending(state, "checkHasValidToken");
+    })
+
+    builder.addCase(checkHasValidToken.fulfilled, (state, action) => {
+      setFulfilled(state, "checkHasValidToken");
+      state.data.hasValidToken = action?.payload;
+    })
+
+    builder.addCase(checkHasValidToken.rejected, (state) => {
+      setRejected(state, "checkHasValidToken");
+    })
   }
 });
 
