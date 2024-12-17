@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { SliceInitialState, UserSession } from "@/types";
 import { setFulfilled, setPending, setRejected } from "./utils";
 
-const apiUrl = import.meta.env.VITE_FASTAPI_URL
+const apiUrl = import.meta.env.VITE_FASTAPI_URL;
 
 const initialUserData: UserSession = {
   hasValidToken: undefined,
@@ -100,11 +100,6 @@ export const getUserDetails = createAsyncThunk(
   }
 )
 
-export const authorizeSpotifySession = createAsyncThunk(
-  "userSessionSlice/authorizeSpotifySession",
-  async () => {},
-);
-
 export const userSessionSlice = createSlice({
   name: "userSessionSlice",
   initialState: initialState,
@@ -153,5 +148,4 @@ export const userSessionSlice = createSlice({
   },
 });
 
-export const {} = userSessionSlice.actions;
 export default userSessionSlice.reducer;

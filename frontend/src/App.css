@@ -120,24 +120,39 @@ body {
 .card {
   background-color: #1c1c1c; /* #1c1c1c; */
   border-radius: 10px;
-  padding: 20px;
   display: flex;
   color: #ffffff;
   font-size: 18px;
   text-align: center;
   height: 350px;
-}
-
-.icon-button {
-  cursor: pointer;
-  color: #888888;
-  font-weight: regular;
+  flex-direction: column;
 }
 
 .card-header {
   display: flex;
   justify-content: space-between;
+  padding: 20px;
   width: 100%;
   height: 30px;
   font-weight: bold;
+  margin-bottom: "1rem";
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.p-divider {
+  opacity: 10%;
+  padding-block: 20px;
+}
+.p-divider-solid.p-divider-horizontal::before {
+  border-top-width: 1px;
+}
+
+.icon-button {
+  cursor: pointer;
+  color: #fff;
+  opacity: 50%;
+  font-weight: regular;
 }
