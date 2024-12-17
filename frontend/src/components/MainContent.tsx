@@ -13,7 +13,7 @@ const MainContent = (): React.JSX.Element => {
           <Card />
           <Card />
           <Card />
-          <div className="card" style={{gridColumn: "1/span 3"}}>
+          <div className="card" style={{ gridColumn: "1/span 3" }}>
             <div className="card-header">
               Trends
               <i className="pi pi-arrow-up-right-and-arrow-down-left-from-center icon-button"></i>
