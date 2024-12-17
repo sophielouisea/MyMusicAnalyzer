@@ -12,6 +12,7 @@ type Props = {
     | React.JSX.Element[]
     | (() => React.JSX.Element);
 };
+
 function AuthProvider({ children }: Props): React.JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
   const hasValidToken = useSelector(
