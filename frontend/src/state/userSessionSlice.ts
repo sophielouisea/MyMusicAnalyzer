@@ -8,38 +8,40 @@ const initialUserData: UserSession = {
   userName: undefined,
   token: undefined,
   hasTrends: undefined,
-}
+};
 
 const initialState: SliceInitialState = {
   isLoading: false,
   requestSuccess: undefined,
   requestError: undefined,
-  data: initialUserData
-}
+  data: initialUserData,
+};
 
 export const checkHasValidToken = createAsyncThunk(
   "userSessionSlice/checkValidToken",
   async () => {
-    console.log("Checking for tokens...")
+    console.log("Checking for tokens...");
     const token = await window.localStorage.getItem("spotifyToken");
 
     const tokenExpiry = await window.localStorage.getItem("spotifyTokenExpiry");
-    const validToken = token && tokenExpiry && (Number(tokenExpiry) > Date.now());
+    const timeNow = (Date.now() / 1000) | 0;
+    const validToken = token && tokenExpiry && Number(tokenExpiry) > timeNow;
 
     if (validToken) {
-      console.log("Token found. Expires:", JSON.stringify(tokenExpiry))
+      console.log(
+        "Token found. Expires:",
+        JSON.stringify(new Date(Number(tokenExpiry) * 1000)),
+      );
       return true;
     }
     return false;
-  }
-)
+  },
+);
 
 export const authorizeSpotifySession = createAsyncThunk(
   "userSessionSlice/authorizeSpotifySession",
-  async () => {
-
-  }
-)
+  async () => {},
+);
 
 export const userSessionSlice = createSlice({
   name: "userSessionSlice",
@@ -47,23 +49,23 @@ export const userSessionSlice = createSlice({
   reducers: {
     setUserData: (state): void => {
       state.data.token = window.localStorage.getItem("spotifyToken") || "";
-    }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(checkHasValidToken.pending, (state) => {
       setPending(state, "checkHasValidToken");
-    })
+    });
 
     builder.addCase(checkHasValidToken.fulfilled, (state, action) => {
       setFulfilled(state, "checkHasValidToken");
       state.data.hasValidToken = action?.payload;
-    })
+    });
 
     builder.addCase(checkHasValidToken.rejected, (state) => {
       setRejected(state, "checkHasValidToken");
-    })
-  }
+    });
+  },
 });
 
-export const { } = userSessionSlice.actions;
+export const {} = userSessionSlice.actions;
 export default userSessionSlice.reducer;

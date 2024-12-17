@@ -3,8 +3,8 @@ import userSessionReducer from "./userSessionSlice";
 
 export const store = configureStore({
   reducer: {
-    userSession: userSessionReducer
-  }
+    userSession: userSessionReducer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

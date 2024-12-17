@@ -1,4 +1,4 @@
-import { SliceInitialState } from "@/types"
+import { SliceInitialState } from "@/types";
 
 export const setPending = (state: SliceInitialState, reducerName: string) => {
   console.log(`${reducerName} pending...`);

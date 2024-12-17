@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 const SPOTIFY_AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 
 const redirectToSpotifyAuth = () => {
@@ -14,13 +14,14 @@ const redirectToSpotifyAuth = () => {
 };
 
 const generateRandomString = (length: number) => {
-  let text = '';
-  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let text = "";
+  const possible =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   for (let i = 0; i < length; i++) {
     text += possible.charAt(Math.floor(Math.random() * possible.length));
   }
   return text;
-}
+};
 
 const Login = () => {
   useEffect(() => {
