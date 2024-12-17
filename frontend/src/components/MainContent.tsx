@@ -7,6 +7,7 @@ import { getTopArtists } from "@/state/artistsSlice";
 
 const MainContent = (): React.JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
+  const topArtists = useSelector((state: RootState) => state.artists.data);
 
   useEffect(() => {
     dispatch(getTopArtists());
@@ -16,9 +17,9 @@ const MainContent = (): React.JSX.Element => {
     <div className="main-content">
       <ScrollPanel style={{ width: "80rem", height: "52rem" }}>
         <div className="main-scrollpanel">
-          <Card title="Top artists" />
-          <Card title="Top tracks" />
-          <Card title="Top genres" />
+          <Card title="Your top artists" items={topArtists}/>
+          <Card title="Your top tracks" />
+          <Card title="Your top genres" />
           <Card />
           <Card />
           <Card />

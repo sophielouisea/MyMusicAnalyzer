@@ -124,7 +124,7 @@ body {
   color: #ffffff;
   font-size: 18px;
   text-align: center;
-  height: 350px;
+  height: 360px;
   flex-direction: column;
 }
 
@@ -139,15 +139,21 @@ body {
 }
 
 .card-content {
-  padding: 20px;
+  /* padding: 20px; */
+  height: 250px;
+  padding-top: 0px;
 }
 
 .p-divider {
   opacity: 10%;
-  padding-block: 20px;
+  padding-top: 20px;
 }
 .p-divider-solid.p-divider-horizontal::before {
   border-top-width: 1px;
+}
+.p-divider-items {
+  opacity: 5%;
+  padding: 5px;
 }
 
 .icon-button {
@@ -155,4 +161,11 @@ body {
   color: #fff;
   opacity: 50%;
   font-weight: regular;
+}
+
+.p-scrollpanel.custombar2 .p-scrollpanel-bar {
+  /* background-color: var(--surface-300);
+  border-radius: 0;*/
+  opacity: 0.5;
+  /* transition: background-color .3s; */
 }
