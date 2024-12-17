@@ -11,13 +11,13 @@ const MainContent = (): React.JSX.Element => {
 
   useEffect(() => {
     dispatch(getTopArtists());
-  }, [])
+  }, []);
 
   return (
     <div className="main-content">
       <ScrollPanel style={{ width: "80rem", height: "52rem" }}>
         <div className="main-scrollpanel">
-          <Card title="Your top artists" items={topArtists}/>
+          <Card title="Your top artists" items={topArtists} />
           <Card title="Your top tracks" />
           <Card title="Your top genres" />
           <Card />

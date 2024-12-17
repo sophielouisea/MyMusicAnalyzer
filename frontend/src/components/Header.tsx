@@ -3,8 +3,9 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const Header = (): React.JSX.Element => {
-  const userName = useSelector((state: RootState) =>
-    state.userSession.data.userName);
+  const userName = useSelector(
+    (state: RootState) => state.userSession.data.userName,
+  );
 
   return (
     <header className="header">

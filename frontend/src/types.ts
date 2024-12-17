@@ -17,7 +17,13 @@ export interface ModalViews {
 }
 
 export interface SliceInitialState {
-  [key: string]: string | boolean | undefined | UserSession | ModalViews | ArtistItem[];
+  [key: string]:
+    | string
+    | boolean
+    | undefined
+    | UserSession
+    | ModalViews
+    | ArtistItem[];
   isLoading: boolean;
   requestSuccess?: boolean;
   requestError?: boolean;
@@ -25,22 +31,22 @@ export interface SliceInitialState {
 }
 
 export interface TopArtists {
-  [key: string]: string
-  name: string
+  [key: string]: string;
+  name: string;
 }
 
 export interface SpotifyItem {
-  [key: string]: string | ArtistItem
-  type: string
-  item: ArtistItem
+  [key: string]: string | ArtistItem;
+  type: string;
+  item: ArtistItem;
 }
 
 export interface ArtistItem {
-  [key: string]: string | number | string[]
-  id: string
-  name: string
-  popularity: number
-  image: string
-  personal_ranking: number
-  genres: string[]
+  [key: string]: string | number | string[];
+  id: string;
+  name: string;
+  popularity: number;
+  image: string;
+  personal_ranking: number;
+  genres: string[];
 }

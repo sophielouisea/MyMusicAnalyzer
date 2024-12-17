@@ -27,18 +27,13 @@ function AuthProvider({ children }: Props): React.JSX.Element {
     if (hasValidToken) {
       dispatch(getUserDetails());
     }
-  }, [hasValidToken])
+  }, [hasValidToken]);
 
   if (hasValidToken === false) {
-
     return <Navigate to="/login" />;
-
   } else if (hasValidToken === true) {
-
     return <> {children} </>;
-
   } else {
-
     return <>Loading...</>;
   }
 }

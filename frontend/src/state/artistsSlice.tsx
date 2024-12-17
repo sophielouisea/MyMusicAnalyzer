@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { ArtistItem, SliceInitialState, } from "@/types";
+import { ArtistItem, SliceInitialState } from "@/types";
 import { setFulfilled, setPending, setRejected } from "./utils";
 
 const apiUrl = import.meta.env.VITE_FASTAPI_URL;
@@ -9,12 +9,12 @@ const initialState: SliceInitialState = {
   data: [],
   requestError: false,
   requestSuccess: false,
-}
+};
 
 export const getTopArtists = createAsyncThunk(
   "artistsSlice/getTopArtists",
   async (arg, { rejectWithValue }) => {
-    console.log("Getting user details...")
+    console.log("Getting user details...");
     const token = await window.localStorage.getItem("spotifyToken");
     if (token) {
       const requestConfig = {
@@ -23,23 +23,26 @@ export const getTopArtists = createAsyncThunk(
           "Content-Type": "application/json",
           token: token,
         },
-      }
+      };
 
       try {
-        const response = await fetch(apiUrl + "artists/top_artists", requestConfig);
+        const response = await fetch(
+          apiUrl + "artists/top_artists",
+          requestConfig,
+        );
         if (response.ok) {
           return response.json();
         }
       } catch (error) {
-        console.log("Error getting top artists:", error)
+        console.log("Error getting top artists:", error);
         return rejectWithValue(error);
       }
     } else {
-      console.log("No token found.")
-      return rejectWithValue("No token was found.")
+      console.log("No token found.");
+      return rejectWithValue("No token was found.");
     }
-  }
-)
+  },
+);
 
 export const artistsSlice = createSlice({
   name: "artistsSlice",

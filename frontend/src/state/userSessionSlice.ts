@@ -41,7 +41,7 @@ export const checkHasValidToken = createAsyncThunk(
 
 export const authenticateUser = createAsyncThunk(
   "userSessionSlice/authenticateUser",
-  async (code: string, {rejectWithValue}) => {
+  async (code: string, { rejectWithValue }) => {
     if (code) {
       const requestConfig = {
         method: "POST",
@@ -49,30 +49,30 @@ export const authenticateUser = createAsyncThunk(
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ code: code }),
-      }
+      };
 
       try {
         const response = await fetch(apiUrl + "user/auth", requestConfig);
         if (response.ok) {
-          console.log("RESPONSE:",  response)
+          console.log("RESPONSE:", response);
           const jsonResponse = await response.json();
-          localStorage.setItem('spotifyToken', jsonResponse.access_token);
-          localStorage.setItem('spotifyTokenExpiry', jsonResponse.expires_at);
+          localStorage.setItem("spotifyToken", jsonResponse.access_token);
+          localStorage.setItem("spotifyTokenExpiry", jsonResponse.expires_at);
         }
       } catch (error) {
-        console.log("Error authenticating user:", error)
+        console.log("Error authenticating user:", error);
         return rejectWithValue(error);
       }
     } else {
-      return rejectWithValue("No auth code was provided.")
+      return rejectWithValue("No auth code was provided.");
     }
-  }
-)
+  },
+);
 
 export const getUserDetails = createAsyncThunk(
   "userSessionSlice/getUserDetails",
-  async (arg, {rejectWithValue}) => {
-    console.log("Getting user details...")
+  async (arg, { rejectWithValue }) => {
+    console.log("Getting user details...");
     const token = await window.localStorage.getItem("spotifyToken");
     if (token) {
       const requestConfig = {
@@ -81,7 +81,7 @@ export const getUserDetails = createAsyncThunk(
           "Content-Type": "application/json",
           token: token,
         },
-      }
+      };
 
       try {
         const response = await fetch(apiUrl + "user/details", requestConfig);
@@ -89,15 +89,15 @@ export const getUserDetails = createAsyncThunk(
           return response.json();
         }
       } catch (error) {
-        console.log("Error getting user details:", error)
+        console.log("Error getting user details:", error);
         return rejectWithValue(error);
       }
     } else {
-      console.log("No token found.")
-      return rejectWithValue("No token was found.")
+      console.log("No token found.");
+      return rejectWithValue("No token was found.");
     }
-  }
-)
+  },
+);
 
 export const userSessionSlice = createSlice({
   name: "userSessionSlice",
