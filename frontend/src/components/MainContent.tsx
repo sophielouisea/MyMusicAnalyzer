@@ -7,7 +7,11 @@ import { getTopArtists } from "@/state/artistsSlice";
 
 const MainContent = (): React.JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
-  const topArtists = useSelector((state: RootState) => state.artists.data);
+  const timeRange = useSelector((state: RootState) =>
+    state.views.timeRange);
+  const topArtists = useSelector((state: RootState) =>
+    state.artists.data[timeRange]);
+
 
   useEffect(() => {
     dispatch(getTopArtists());

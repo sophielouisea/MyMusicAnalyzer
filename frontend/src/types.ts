@@ -23,30 +23,34 @@ export interface SliceInitialState {
     | undefined
     | UserSession
     | ModalViews
-    | ArtistItem[];
+    | TopItems
+    | any;
   isLoading: boolean;
   requestSuccess?: boolean;
   requestError?: boolean;
-  data: UserSession | ModalViews | ArtistItem[];
+  data: any // UserSession | ModalViews | TopItems | ;
 }
 
-export interface TopArtists {
-  [key: string]: string;
-  name: string;
+export interface TopItems {
+  [key: string]: Item[];
+  short_term: Item[];
+  medium_term: Item[];
+  long_term: Item[];
 }
 
-export interface SpotifyItem {
-  [key: string]: string | ArtistItem;
-  type: string;
-  item: ArtistItem;
-}
-
-export interface ArtistItem {
+export interface Item {
   [key: string]: string | number | string[];
   id: string;
   name: string;
   popularity: number;
   image: string;
   personal_ranking: number;
+}
+
+export interface ArtistItem extends Item {
   genres: string[];
+}
+
+export interface TrackItem extends Item {
+  artist: string;
 }

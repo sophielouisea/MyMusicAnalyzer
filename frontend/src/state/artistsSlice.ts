@@ -6,7 +6,7 @@ const apiUrl = import.meta.env.VITE_FASTAPI_URL;
 
 const initialState: SliceInitialState = {
   isLoading: false,
-  data: [],
+  data: {},
   requestError: false,
   requestSuccess: false,
 };
@@ -55,7 +55,7 @@ export const artistsSlice = createSlice({
 
     builder.addCase(getTopArtists.fulfilled, (state, action) => {
       setFulfilled(state, "getTopArtists");
-      console.log("RES:", action?.payload[0]);
+      console.log("RES:", action?.payload);
       state.data = action?.payload;
     });
 

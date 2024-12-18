@@ -14,6 +14,7 @@ type Props = {
 };
 
 function AuthProvider({ children }: Props): React.JSX.Element {
+  return <> {children} </>;
   const dispatch = useDispatch<AppDispatch>();
   const hasValidToken = useSelector(
     (state: RootState) => state.userSession.data.hasValidToken,

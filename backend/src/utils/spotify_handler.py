@@ -12,6 +12,10 @@ class SpotifyHandler:
         response = self._get("me/top/artists")
         return self.format_items(response)
 
+    def get_top_tracks(self):
+        response = self._get("me/top/tracks")
+        return self.format_items(response)
+
     def get_user_details(self):
         response = self._get("me")
         return response
@@ -47,7 +51,7 @@ class SpotifyHandler:
 
     @staticmethod
     def format_track_item(item: dict, rank: int):
-        filtered_keys = ["name", "id", "genres", "popularity", "artists"]
+        filtered_keys = ["name", "id", "genres", "popularity", "artists"] # TODO add image?
         return {
             "id": item.get("id"),
             "name": item.get("name"),
