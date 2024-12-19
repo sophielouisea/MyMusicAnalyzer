@@ -10,7 +10,6 @@ class SpotifyHandler:
 
     def get_top_artists(self, limit: int = None, time_range: str = None):
         response = self._get("me/top/artists", limit=limit, time_range=time_range)
-        print(response)
         return self.format_items(response)
 
     def get_top_tracks(self, limit: int = None, time_range: str = None):
@@ -25,7 +24,6 @@ class SpotifyHandler:
         raise NotImplementedError()
 
     def _get(self, url_path: str, **params) -> dict:
-        print(params)
         response = requests.get(
             url="https://api.spotify.com/v1/" + url_path,
             headers={
@@ -33,6 +31,7 @@ class SpotifyHandler:
             },
             params=params | {}
         )
+        print(response.json())
         return response.json()
 
     def format_items(self, items: list[dict]) -> list[dict]:
@@ -59,5 +58,6 @@ class SpotifyHandler:
             "name": item.get("name"),
             "artist": item.get("artists")[0]["name"],
             "popularity": item.get("popularity"),
+            "image": item["album"]["images"][2]["url"],
             "personal_ranking": rank
         }

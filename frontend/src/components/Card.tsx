@@ -1,19 +1,19 @@
 import React from "react";
 import "primeicons/primeicons.css";
 import { Divider } from "primereact/divider";
-import { ArtistItem } from "@/types";
+import { ArtistItem, TrackItem } from "@/types";
 import { Image } from "primereact/image";
 import { ScrollPanel } from "primereact/scrollpanel";
 
 type CardProps = {
   title?: string;
-  items?: ArtistItem[];
+  items?: ArtistItem[] | TrackItem[];
 };
 
 const Card: React.FC<CardProps> = ({ title, items }): React.JSX.Element => {
   const numItems = 20;
 
-  const renderItem = (item: ArtistItem) => {
+  const renderItem = (item: ArtistItem | TrackItem) => {
     return (
       <>
         <p

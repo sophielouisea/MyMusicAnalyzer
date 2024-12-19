@@ -17,11 +17,13 @@ def get_top_tracks(token: Annotated[str | None, Header()], response: Response):
         short_term = spotify.get_top_tracks(limit=20, time_range="short_term")
         medium_term = spotify.get_top_tracks(limit=20, time_range="medium_term")
         long_term = spotify.get_top_tracks(limit=20, time_range="long_term")
-        return {
+        response = {
             "short_term": short_term,
             "medium_term": medium_term,
             "long_term": long_term,
         }
+        print(response)
+        return response
     else:
         response.body = "Please provide a valid token."
         response.status_code = status.HTTP_401_UNAUTHORIZED

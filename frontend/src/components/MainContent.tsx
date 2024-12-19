@@ -4,6 +4,7 @@ import { ScrollPanel } from "primereact/scrollpanel";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/state/store";
 import { getTopArtists } from "@/state/artistsSlice";
+import { getTopTracks } from "@/state/tracksSlice";
 
 const MainContent = (): React.JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
@@ -11,10 +12,13 @@ const MainContent = (): React.JSX.Element => {
     state.views.timeRange);
   const topArtists = useSelector((state: RootState) =>
     state.artists.data[timeRange]);
+  const topTracks = useSelector((state: RootState) =>
+    state.tracks.data[timeRange]);
 
 
   useEffect(() => {
     dispatch(getTopArtists());
+    dispatch(getTopTracks());
   }, []);
 
   return (
@@ -22,7 +26,7 @@ const MainContent = (): React.JSX.Element => {
       <ScrollPanel style={{ width: "80rem", height: "52rem" }}>
         <div className="main-scrollpanel">
           <Card title="Your top artists" items={topArtists} />
-          <Card title="Your top tracks" />
+          <Card title="Your top tracks" items={topTracks} />
           <Card title="Your top genres" />
           <Card />
           <Card />
