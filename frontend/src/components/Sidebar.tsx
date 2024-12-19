@@ -1,27 +1,34 @@
-import { AppDispatch } from "@/state/store";
+import { AppDispatch, RootState } from "@/state/store";
 import { setTimeRangeView } from "@/state/viewsSlice";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Sidebar = (): React.JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
+  const selectedView = useSelector((state: RootState) =>
+    state.views.timeRange)
+
+  const getClassName = (buttonName: string) => {
+    return (buttonName === selectedView) ? "sidebar-button-selected":"sidebar-button"
+  }
+
   return (
     <div className="sidebar">
       <div>
         <button
-          className="sidebar-button"
+          className={getClassName("short_term")}
           onClick={() => { dispatch(setTimeRangeView("short_term"))}}
         >
           Past month
         </button>
         <button
-          className="sidebar-button"
+          className={getClassName("medium_term")}
           onClick={() => { dispatch(setTimeRangeView("medium_term")) }}
         >
           Past 6 months
         </button>
         <button
-          className="sidebar-button"
+          className={getClassName("long_term")}
           onClick={() => { dispatch(setTimeRangeView("long_term")) }}
         >
           Past year

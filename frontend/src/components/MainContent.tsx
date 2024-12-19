@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import TopCard from "./TopCard";
 import Card from "./Card";
 import { ScrollPanel } from "primereact/scrollpanel";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,6 +19,30 @@ const MainContent = (): React.JSX.Element => {
   const topGenres = useSelector((state: RootState) =>
     state.genres.data[timeRange]);
 
+  interface userStats {
+    highest: string
+    highestIndex: number
+    averageIndex: number
+    lowest: string
+    lowestIndex: number
+  }
+
+  const renderPopularityInsights = () => {
+    let popularity: userStats;
+    return (
+      <p>
+        Spotify classifies artists' popularity on a 0-100 scale. The average
+        popularity of your most listened-to artists is {popularity.averageIndex}.
+
+        The most popular artist you listen to is {popularity.highest} who has
+        a popularity score of {popularity.highestIndex}.
+
+        The least popular artist you listen to is {popularity.lowest} who has
+        a popularity score of {popularity.lowestIndex}.
+      </p>
+    )
+  }
+
 
   useEffect(() => {
     dispatch(getTopArtists());
@@ -29,18 +54,22 @@ const MainContent = (): React.JSX.Element => {
     <div className="main-content">
       <ScrollPanel style={{ width: "80rem", height: "52rem" }}>
         <div className="main-scrollpanel">
-          <Card title="Your top artists" items={topArtists} />
-          <Card title="Your top tracks" items={topTracks} />
-          <Card title="Your top genres" items={topGenres} />
-          <Card />
-          <Card />
-          <Card />
-          <div className="card" style={{ gridColumn: "1/span 3" }}>
-            <div className="card-header">
-              Trends
-              <i className="pi pi-arrow-up-right-and-arrow-down-left-from-center icon-button"></i>
-            </div>
-          </div>
+          <TopCard title="Your top artists" items={topArtists} />
+          <TopCard title="Your top tracks" items={topTracks} />
+          <TopCard title="Your top genres" items={topGenres} />
+          <Card title="Popularity" className="card">
+            Popularity stats.
+          </Card>
+          <Card title="Trends" className="card-double">
+            <p style={{
+              opacity: 0.7,
+              fontSize: 15,
+              textAlign: "left",
+              marginLeft: "1.5rem"
+            }}>
+              Coming soon...
+            </p>
+          </Card>
         </div>
       </ScrollPanel>
     </div>
