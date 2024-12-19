@@ -54,10 +54,10 @@ class SpotifyHandler:
     def format_track_item(item: dict, rank: int):
         filtered_keys = ["name", "id", "genres", "popularity", "artists"] # TODO add image?
         return {
-            "id": item.get("id"),
-            "name": item.get("name"),
-            "artist": item.get("artists")[0]["name"],
-            "popularity": item.get("popularity"),
+            "id": item["id"],
+            "name": item["name"],
+            "artist": item["artists"][0]["name"],
+            "popularity": item["popularity"],
             "image": item["album"]["images"][2]["url"],
             "personal_ranking": rank
         }

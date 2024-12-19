@@ -13,6 +13,14 @@ type CardProps = {
 const Card: React.FC<CardProps> = ({ title, items }): React.JSX.Element => {
   const numItems = 20;
 
+  // const ImageComponent = ({image: string | undefined}) => {
+  //   if (image) {
+  //     return <Image src={item.image} width="43" />
+  //   } else {
+  //     return <span style={{height: "43px"}}></span>
+  //   }
+  // }
+
   const renderItem = (item: ArtistItem | TrackItem) => {
     return (
       <>
@@ -27,6 +35,7 @@ const Card: React.FC<CardProps> = ({ title, items }): React.JSX.Element => {
             alignItems: "center",
             alignContent: "center",
             display: "flex",
+            minHeight: "48px"
           }}
         >
           <span style={{ marginRight: "20px" }}>{item.personal_ranking}</span>

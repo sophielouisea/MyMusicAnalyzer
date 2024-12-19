@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/state/store";
 import { getTopArtists } from "@/state/artistsSlice";
 import { getTopTracks } from "@/state/tracksSlice";
+import { getTopGenres } from "@/state/genresSlice";
 
 const MainContent = (): React.JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
@@ -14,11 +15,14 @@ const MainContent = (): React.JSX.Element => {
     state.artists.data[timeRange]);
   const topTracks = useSelector((state: RootState) =>
     state.tracks.data[timeRange]);
+  const topGenres = useSelector((state: RootState) =>
+    state.genres.data[timeRange]);
 
 
   useEffect(() => {
     dispatch(getTopArtists());
     dispatch(getTopTracks());
+    dispatch(getTopGenres());
   }, []);
 
   return (
@@ -27,7 +31,7 @@ const MainContent = (): React.JSX.Element => {
         <div className="main-scrollpanel">
           <Card title="Your top artists" items={topArtists} />
           <Card title="Your top tracks" items={topTracks} />
-          <Card title="Your top genres" />
+          <Card title="Your top genres" items={topGenres} />
           <Card />
           <Card />
           <Card />

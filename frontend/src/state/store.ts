@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userSessionReducer from "./userSessionSlice";
 import artistsReducer from "./artistsSlice";
+import genresReducer from "./genresSlice";
 import tracksReducer from "./tracksSlice";
 import viewsReducer from "./viewsSlice";
 
@@ -8,6 +9,7 @@ export const store = configureStore({
   reducer: {
     userSession: userSessionReducer,
     artists: artistsReducer,
+    genres: genresReducer,
     tracks: tracksReducer,
     views: viewsReducer,
   },
