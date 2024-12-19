@@ -22,7 +22,6 @@ def get_top_tracks(token: Annotated[str | None, Header()], response: Response):
             "medium_term": medium_term,
             "long_term": long_term,
         }
-        print(response)
         return response
     else:
         response.body = "Please provide a valid token."

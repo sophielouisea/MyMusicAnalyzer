@@ -54,3 +54,11 @@ export interface ArtistItem extends Item {
 export interface TrackItem extends Item {
   artist: string;
 }
+
+export interface ArtistsPopularity {
+  highest: string
+  highest_index: number
+  average_index: number
+  lowest: string
+  lowest_index: number
+}

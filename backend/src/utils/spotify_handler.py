@@ -31,7 +31,6 @@ class SpotifyHandler:
             },
             params=params | {}
         )
-        print(response.json())
         return response.json()
 
     def format_items(self, items: list[dict]) -> list[dict]:

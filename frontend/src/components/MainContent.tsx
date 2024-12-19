@@ -7,6 +7,7 @@ import { AppDispatch, RootState } from "@/state/store";
 import { getTopArtists } from "@/state/artistsSlice";
 import { getTopTracks } from "@/state/tracksSlice";
 import { getTopGenres } from "@/state/genresSlice";
+import { getPopularity } from "@/state/popularitySlice";
 
 const MainContent = (): React.JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
@@ -19,36 +20,37 @@ const MainContent = (): React.JSX.Element => {
   const topGenres = useSelector((state: RootState) =>
     state.genres.data[timeRange]);
 
-  interface userStats {
-    highest: string
-    highestIndex: number
-    averageIndex: number
-    lowest: string
-    lowestIndex: number
-  }
-
-  const renderPopularityInsights = () => {
-    let popularity: userStats;
-    return (
-      <p>
-        Spotify classifies artists' popularity on a 0-100 scale. The average
-        popularity of your most listened-to artists is {popularity.averageIndex}.
-
-        The most popular artist you listen to is {popularity.highest} who has
-        a popularity score of {popularity.highestIndex}.
-
-        The least popular artist you listen to is {popularity.lowest} who has
-        a popularity score of {popularity.lowestIndex}.
-      </p>
-    )
-  }
-
-
   useEffect(() => {
     dispatch(getTopArtists());
     dispatch(getTopTracks());
     dispatch(getTopGenres());
+    dispatch(getPopularity());
   }, []);
+
+  const renderPopularityInsights = () => {
+    const popularity = useSelector((state: RootState) =>
+      state.popularity.data[timeRange]);
+
+    if (popularity) {
+      return (
+        <>
+          <p style={{fontSize: "14px", opacity: 0.5}}>
+            Spotify classifies artists' popularity on a 0-100 scale.
+          </p>
+          <p className="p-insights">
+            <b style={{opacity: 1, color:"white", fontWeight: 600}}>{JSON.stringify(popularity.average_index)}</b> is the average popularity of your most listened-to artists.
+            <br style={{marginBottom: "1rem"}}></br>
+            The most popular artist you listen to is <b style={{ opacity: 1, color: "white", fontWeight: 600 }}>{popularity.highest}</b>, who has
+            a popularity score of <b style={{ opacity: 1, color: "white", fontWeight: 600 }}>{JSON.stringify(popularity.highest_index)}</b>.
+            <br style={{ marginBottom: "1rem" }}></br>
+            The least popular artist you listen to is <b style={{ opacity: 1, color: "white", fontWeight: 600 }}>{popularity.lowest}</b>, with
+            a popularity score of <b style={{ opacity: 1, color: "white", fontWeight: 600 }}>{JSON.stringify(popularity.lowest_index)}</b>.
+          </p>
+        </>
+      )
+    }
+    return <></>
+  }
 
   return (
     <div className="main-content">
@@ -58,16 +60,16 @@ const MainContent = (): React.JSX.Element => {
           <TopCard title="Your top tracks" items={topTracks} />
           <TopCard title="Your top genres" items={topGenres} />
           <Card title="Popularity" className="card">
-            Popularity stats.
+            {renderPopularityInsights()}
           </Card>
           <Card title="Trends" className="card-double">
             <p style={{
-              opacity: 0.7,
-              fontSize: 15,
+              opacity: 0.5,
+              fontSize: 14,
               textAlign: "left",
-              marginLeft: "1.5rem"
+              marginLeft: "1rem"
             }}>
-              Coming soon...
+              Coming soon.
             </p>
           </Card>
         </div>

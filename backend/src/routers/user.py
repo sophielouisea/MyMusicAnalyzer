@@ -35,8 +35,6 @@ def auth(request: SpotifyCallbackRequest):
     base64_string = base64_bytes.decode("ascii")
     expires_time = datetime.now() + timedelta(hours=1)
     expires_timestamp = str(int(expires_time.timestamp()))
-    print(data)
-
     headers = {
         "content-type": "application/x-www-form-urlencoded",
         "Authorization": f"Basic {base64_string}"
@@ -51,8 +49,6 @@ def auth(request: SpotifyCallbackRequest):
 
     token_info = response.json()
     token_info["expires_at"] = expires_timestamp
-    print(token_info)
-
     return token_info
 
 @router.get("/details")
