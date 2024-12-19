@@ -27,7 +27,7 @@ const TopCard = ({ title, items }: CardProps): React.JSX.Element => {
             alignItems: "center",
             alignContent: "center",
             display: "flex",
-            minHeight: "48px"
+            minHeight: "48px",
           }}
         >
           <span style={{ marginRight: "20px" }}>{item.personal_ranking}</span>
@@ -45,10 +45,9 @@ const TopCard = ({ title, items }: CardProps): React.JSX.Element => {
 
   return (
     <Card title={title || ""} className="card">
-      {
-        items?.slice(0, numItems).map(
-          (item, index) => <p key={index}>{renderItem(item)}</p>) || ""
-      }
+      {items
+        ?.slice(0, numItems)
+        .map((item, index) => <p key={index}>{renderItem(item)}</p>) || ""}
     </Card>
   );
 };

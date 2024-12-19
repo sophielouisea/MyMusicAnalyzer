@@ -28,7 +28,7 @@ export interface SliceInitialState {
   isLoading: boolean;
   requestSuccess?: boolean;
   requestError?: boolean;
-  data: any // UserSession | ModalViews | TopItems | ;
+  data: any; // UserSession | ModalViews | TopItems | ;
 }
 
 export interface TopItems {
@@ -56,9 +56,9 @@ export interface TrackItem extends Item {
 }
 
 export interface ArtistsPopularity {
-  highest: string
-  highest_index: number
-  average_index: number
-  lowest: string
-  lowest_index: number
+  highest: string;
+  highest_index: number;
+  average_index: number;
+  lowest: string;
+  lowest_index: number;
 }

@@ -10,11 +10,18 @@ class SpotifyHandler:
 
     def get_top_artists(self, limit: int = None, time_range: str = None):
         response = self._get("me/top/artists", limit=limit, time_range=time_range)
-        return self.format_items(response)
+        print("RESPONSE:", response)
+        if response:
+            return self.format_items(response)
+        else:
+            return []
 
     def get_top_tracks(self, limit: int = None, time_range: str = None):
         response = self._get("me/top/tracks", limit=limit, time_range=time_range)
-        return self.format_items(response)
+        if response:
+            return self.format_items(response)
+        else:
+            return []
 
     def get_user_details(self):
         response = self._get("me")
@@ -31,7 +38,11 @@ class SpotifyHandler:
             },
             params=params | {}
         )
-        return response.json()
+        if response.ok:
+            return response.json()
+        else:
+            print(response)
+            return []
 
     def format_items(self, items: list[dict]) -> list[dict]:
         type = items['items'][0]["type"]
@@ -51,7 +62,6 @@ class SpotifyHandler:
 
     @staticmethod
     def format_track_item(item: dict, rank: int):
-        filtered_keys = ["name", "id", "genres", "popularity", "artists"] # TODO add image?
         return {
             "id": item["id"],
             "name": item["name"],

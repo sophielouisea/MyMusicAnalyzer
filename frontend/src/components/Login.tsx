@@ -1,3 +1,4 @@
+import { ProgressSpinner } from "primereact/progressspinner";
 import React, { useEffect } from "react";
 const SPOTIFY_AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 
@@ -28,7 +29,8 @@ const Login = () => {
     redirectToSpotifyAuth();
   }, []);
 
-  return <div>Loading... Redirecting to Spotify for login...</div>;
+  console.log("Loading...Redirecting to Spotify for login...");
+  return <ProgressSpinner className="loading-spinner" animationDuration=".5s" />;
 };
 
 export default Login;

@@ -4,8 +4,8 @@ import { Divider } from "primereact/divider";
 import { ScrollPanel } from "primereact/scrollpanel";
 
 type Props = {
-  title: string,
-  className: string,
+  title: string;
+  className: string;
   children: ReactNode;
 };
 
@@ -18,7 +18,7 @@ const Card = ({ title, className, children }: Props): React.JSX.Element => {
       <Divider />
       <div className="card-content">
         <ScrollPanel style={{ height: "320px" }} className="custombar2">
-          { children }
+          {children}
         </ScrollPanel>
       </div>
     </div>

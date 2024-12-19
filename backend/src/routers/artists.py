@@ -47,12 +47,15 @@ def get_popularity(token: Annotated[str | None, Header()], response: Response):
         short_term = spotify.get_top_artists(limit=50, time_range="short_term")
         medium_term = spotify.get_top_artists(limit=50, time_range="medium_term")
         long_term = spotify.get_top_artists(limit=50, time_range="long_term")
-        res = {
-            "short_term": get_popularity_summary(short_term),
-            "medium_term": get_popularity_summary(medium_term),
-            "long_term": get_popularity_summary(long_term),
-        }
-        print("RES:", res)
+        if short_term:
+            res = {
+                "short_term": get_popularity_summary(short_term),
+                "medium_term": get_popularity_summary(medium_term),
+                "long_term": get_popularity_summary(long_term),
+            }
+            print("RES:", res)
+        else:
+            res = {"message": "An error occurred."}
         return res
     else:
         response.body = "Please provide a valid token."

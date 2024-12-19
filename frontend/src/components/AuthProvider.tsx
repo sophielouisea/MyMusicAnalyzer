@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/state/store";
 import { checkHasValidToken, getUserDetails } from "@/state/userSessionSlice";
 import { AppDispatch } from "@/state/store";
+import { ProgressSpinner } from "primereact/progressspinner";
 
 type Props = {
   children:
@@ -34,7 +35,7 @@ function AuthProvider({ children }: Props): React.JSX.Element {
   } else if (hasValidToken === true) {
     return <> {children} </>;
   } else {
-    return <>Loading...</>;
+    return <ProgressSpinner className="loading-spinner" animationDuration=".5s" />;
   }
 }
 
