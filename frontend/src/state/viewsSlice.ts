@@ -1,29 +1,21 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 
 
 export const viewsSlice = createSlice({
   name: "viewsSlice",
   initialState: {
-    timeRange: "medium_term"
+    timeRange: "short_term"
   },
   reducers: {
-    showShortTermView: (state) => {
-      state.timeRange = "short_term"
-    },
-    showMediumTermView: (state) => {
-      state.timeRange = "medium_term"
-    },
-    showLongTermView: (state) => {
-      state.timeRange = "long_term"
+    setTimeRangeView: (state, action: PayloadAction<"medium_term" | "short_term" | "long_term">) => {
+      state.timeRange = action.payload
     },
   }
 })
 
 export const {
-  showShortTermView,
-  showMediumTermView,
-  showLongTermView,
+  setTimeRangeView
 } = viewsSlice.actions;
 
 export default viewsSlice.reducer;

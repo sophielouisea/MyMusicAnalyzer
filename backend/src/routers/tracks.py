@@ -5,67 +5,23 @@ from utils.spotify_handler import SpotifyHandler
 
 router = APIRouter(prefix="/tracks", tags=["Tracks"])
 
-TMP_VALS = [
-    {
-        "id": "aa",
-        "name": "Pyramids",
-        "artist": "Frank Ocean",
-        "popularity": 87,
-        "personal_ranking": 1,
-        "image": ""
-    },
-    {
-        "id": "aa",
-        "name": "Pyramids",
-        "artist": "Frank Ocean",
-        "popularity": 87,
-        "personal_ranking": 1,
-        "image": ""
-    },
-    {
-        "id": "aa",
-        "name": "Pyramids",
-        "artist": "Frank Ocean",
-        "popularity": 87,
-        "personal_ranking": 1,
-        "image": ""
-    },
-    {
-        "id": "aa",
-        "name": "Pyramids",
-        "artist": "Frank Ocean",
-        "popularity": 87,
-        "personal_ranking": 1,
-        "image": ""
-    },
-    {
-        "id": "aa",
-        "name": "Pyramids",
-        "artist": "Frank Ocean",
-        "popularity": 87,
-        "personal_ranking": 1,
-        "image": ""
-    },
-    {
-        "id": "aa",
-        "name": "Pyramids",
-        "artist": "Frank Ocean",
-        "popularity": 87,
-        "personal_ranking": 1,
-        "image": ""
-    },
-]
 
 @router.get("/ping")
 def tracks_ping():
     return "Ok"
 
 @router.get("/top_tracks")
-def get_top_artists(token: Annotated[str | None, Header()], response: Response):
+def get_top_tracks(token: Annotated[str | None, Header()], response: Response):
     if token:
-        # spotify = SpotifyHandler(token)
-        # return spotify.get_top_tracks()
-        return TMP_VALS
+        spotify = SpotifyHandler(token)
+        short_term = spotify.get_top_tracks(limit=20, time_range="short_term")
+        medium_term = spotify.get_top_tracks(limit=20, time_range="medium_term")
+        long_term = spotify.get_top_tracks(limit=20, time_range="long_term")
+        return {
+            "short_term": short_term,
+            "medium_term": medium_term,
+            "long_term": long_term,
+        }
     else:
         response.body = "Please provide a valid token."
         response.status_code = status.HTTP_401_UNAUTHORIZED

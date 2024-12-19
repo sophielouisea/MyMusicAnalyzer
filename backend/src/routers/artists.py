@@ -6,52 +6,6 @@ from pydantic import BaseModel
 
 router = APIRouter(prefix="/artists", tags=["Artists"])
 
-
-TMP_VALS = {
-    "medium_term": [
-        {
-            "name": "Frank Ocean",
-            "id": "aa",
-            "image": "aa",
-            "popularity": 87,
-            "personal_ranking": 1,
-            "genres": ["pop", "r&b"]
-        },
-        {
-            "name": "Frank Ocean",
-            "id": "aa",
-            "image": "aa",
-            "popularity": 87,
-            "personal_ranking": 2,
-            "genres": ["pop", "r&b"]
-        },
-        {
-            "name": "Frank Ocean",
-            "id": "aa",
-            "image": "aa",
-            "popularity": 87,
-            "personal_ranking": 3,
-            "genres": ["pop", "r&b"]
-        },
-        {
-            "name": "Frank Ocean",
-            "id": "aa",
-            "image": "aa",
-            "popularity": 87,
-            "personal_ranking": 4,
-            "genres": ["pop", "r&b"]
-        },
-        {
-            "name": "Frank Ocean",
-            "id": "aa",
-            "image": "aa",
-            "popularity": 87,
-            "personal_ranking": 5,
-            "genres": ["pop", "r&b"]
-        },
-    ]
-}
-
 @router.get("/ping")
 def artists_ping():
     return "Ok"
@@ -59,9 +13,15 @@ def artists_ping():
 @router.get("/top_artists")
 def get_top_artists(token: Annotated[str | None, Header()], response: Response):
     if token:
-        # spotify = SpotifyHandler(token)
-        # return spotify.get_top_artists()
-        return TMP_VALS
+        spotify = SpotifyHandler(token)
+        short_term = spotify.get_top_artists(limit=20, time_range="short_term")
+        medium_term = spotify.get_top_artists(limit=20, time_range="medium_term")
+        long_term = spotify.get_top_artists(limit=20, time_range="long_term")
+        return {
+            "short_term": short_term,
+            "medium_term": medium_term,
+            "long_term": long_term,
+        }
     else:
         response.body = "Please provide a valid token."
         response.status_code = status.HTTP_401_UNAUTHORIZED

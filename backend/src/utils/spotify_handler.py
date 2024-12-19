@@ -8,12 +8,13 @@ class SpotifyHandler:
     def authenticate(self):
         raise NotImplementedError()
 
-    def get_top_artists(self):
-        response = self._get("me/top/artists")
+    def get_top_artists(self, limit: int = None, time_range: str = None):
+        response = self._get("me/top/artists", limit=limit, time_range=time_range)
+        print(response)
         return self.format_items(response)
 
-    def get_top_tracks(self):
-        response = self._get("me/top/tracks")
+    def get_top_tracks(self, limit: int = None, time_range: str = None):
+        response = self._get("me/top/tracks", limit=limit, time_range=time_range)
         return self.format_items(response)
 
     def get_user_details(self):
@@ -23,13 +24,14 @@ class SpotifyHandler:
     def _check_token(self):
         raise NotImplementedError()
 
-    def _get(self, url_path: str, **data) -> dict:
+    def _get(self, url_path: str, **params) -> dict:
+        print(params)
         response = requests.get(
-            url= "https://api.spotify.com/v1/" + url_path,
+            url="https://api.spotify.com/v1/" + url_path,
             headers={
                 "Authorization": f"Bearer {self._token}"
             },
-            data=data | {}
+            params=params | {}
         )
         return response.json()
 

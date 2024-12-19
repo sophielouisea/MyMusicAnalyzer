@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { ArtistItem, SliceInitialState } from "@/types";
+import { SliceInitialState } from "@/types";
 import { setFulfilled, setPending, setRejected } from "./utils";
 
 const apiUrl = import.meta.env.VITE_FASTAPI_URL;
