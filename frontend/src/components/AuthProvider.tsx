@@ -35,7 +35,9 @@ function AuthProvider({ children }: Props): React.JSX.Element {
   } else if (hasValidToken === true) {
     return <> {children} </>;
   } else {
-    return <ProgressSpinner className="loading-spinner" animationDuration=".5s" />;
+    return (
+      <ProgressSpinner className="loading-spinner" animationDuration=".5s" />
+    );
   }
 }
 

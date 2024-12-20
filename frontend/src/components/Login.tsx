@@ -30,7 +30,9 @@ const Login = () => {
   }, []);
 
   console.log("Loading...Redirecting to Spotify for login...");
-  return <ProgressSpinner className="loading-spinner" animationDuration=".5s" />;
+  return (
+    <ProgressSpinner className="loading-spinner" animationDuration=".5s" />
+  );
 };
 
 export default Login;

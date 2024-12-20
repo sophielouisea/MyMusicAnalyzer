@@ -3,8 +3,7 @@ import { authenticateUser } from "@/state/userSessionSlice";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { ProgressSpinner } from 'primereact/progressspinner';
-
+import { ProgressSpinner } from "primereact/progressspinner";
 
 const SpotifyCallback = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -26,8 +25,10 @@ const SpotifyCallback = () => {
     navigate("/");
   }
 
-  console.log("SpotifyCallback...")
-  return <ProgressSpinner className="loading-spinner" animationDuration=".5s" />;
+  console.log("SpotifyCallback...");
+  return (
+    <ProgressSpinner className="loading-spinner" animationDuration=".5s" />
+  );
 };
 
 export default SpotifyCallback;
