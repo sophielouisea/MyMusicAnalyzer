@@ -262,3 +262,5 @@ Thumbs.db
 .netlify
 
 .env*
+
+backend/notebooks/*
