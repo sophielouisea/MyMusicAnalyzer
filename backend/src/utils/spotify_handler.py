@@ -1,4 +1,5 @@
 import requests
+from typing import Callable, Literal
 
 class SpotifyHandler:
 
@@ -8,22 +9,26 @@ class SpotifyHandler:
     def authenticate(self):
         raise NotImplementedError()
 
-    def get_top_artists(self, limit: int = None, time_range: str = None):
-        response = self._get("me/top/artists", limit=limit, time_range=time_range)
-        print("RESPONSE:", response)
-        if response:
-            return self.format_items(response)
-        else:
-            return []
+    def get_top(self, type: Literal["artists", "tracks"],
+                processing_function: Callable = None, limit: int = 20,
+                format: bool = True) -> dict:
+        """
+        """
+        response = {}
+        for time_range in ["short_term", "medium_term", "long_term"]:
+            response[time_range] = self._get(
+                f"me/top/{type}",
+                limit=limit,
+                time_range=time_range
+            )
+            print(response)
+            if format:
+                response[time_range] = self.format_items(response[time_range])
+            if processing_function:
+                response[time_range] = processing_function(response[time_range])
+        return response
 
-    def get_top_tracks(self, limit: int = None, time_range: str = None):
-        response = self._get("me/top/tracks", limit=limit, time_range=time_range)
-        if response:
-            return self.format_items(response)
-        else:
-            return []
-
-    def get_user_details(self):
+    def get_user_details(self) -> dict:
         response = self._get("me")
         return response
 
@@ -61,7 +66,7 @@ class SpotifyHandler:
         return formatted_artist
 
     @staticmethod
-    def format_track_item(item: dict, rank: int):
+    def format_track_item(item: dict, rank: int) -> dict:
         return {
             "id": item["id"],
             "name": item["name"],

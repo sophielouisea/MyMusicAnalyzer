@@ -5,11 +5,13 @@ import genresReducer from "./genresSlice";
 import popularityReducer from "./popularitySlice";
 import tracksReducer from "./tracksSlice";
 import viewsReducer from "./viewsSlice";
+import decadesReducer from "./decadesSlice";
 
 export const store = configureStore({
   reducer: {
     userSession: userSessionReducer,
     artists: artistsReducer,
+    decades: decadesReducer,
     genres: genresReducer,
     popularity: popularityReducer,
     tracks: tracksReducer,

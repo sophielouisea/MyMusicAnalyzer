@@ -8,6 +8,7 @@ import { getTopArtists } from "@/state/artistsSlice";
 import { getTopTracks } from "@/state/tracksSlice";
 import { getTopGenres } from "@/state/genresSlice";
 import { getPopularity } from "@/state/popularitySlice";
+import { getDecades } from "@/state/decadesSlice";
 
 const MainContent = (): React.JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
@@ -27,7 +28,29 @@ const MainContent = (): React.JSX.Element => {
     dispatch(getTopTracks());
     dispatch(getTopGenres());
     dispatch(getPopularity());
+    dispatch(getDecades());
   }, []);
+
+  const renderDecadesInsights = () => {
+    const topDecades = useSelector(
+      (state: RootState) => state.decades.data[timeRange],
+    );
+
+    if (topDecades) {
+      return (
+        <>
+          <p className="p-insights">
+            The decades you've been listening to are:
+            {Object.keys(topDecades).map((year, index) =>
+              <li index={index}>{year}</li>)
+            }
+          </p>
+          <p>{JSON.stringify(topDecades)}</p>
+        </>
+      )
+    }
+    return <></>
+  }
 
   const renderPopularityInsights = () => {
     const popularity = useSelector(
@@ -43,6 +66,7 @@ const MainContent = (): React.JSX.Element => {
               opacity: 0.5,
               textAlign: "left",
               marginInline: "1.5rem",
+              marginBottom: "0"
             }}
           >
             Spotify classifies artists' popularity on a 0 (least popular) to 100
@@ -86,10 +110,10 @@ const MainContent = (): React.JSX.Element => {
           <TopCard title="Your top artists" items={topArtists} />
           <TopCard title="Your top tracks" items={topTracks} />
           <TopCard title="Your top genres" items={topGenres} />
-          <Card title="Popularity" className="card">
+          <Card title="Popularity" className="card-double">
             {renderPopularityInsights()}
           </Card>
-          <Card title="Trends" className="card-double">
+          <Card title="Your musical period" className="card-double">
             <p
               style={{
                 opacity: 0.5,
@@ -98,7 +122,7 @@ const MainContent = (): React.JSX.Element => {
                 marginLeft: "1rem",
               }}
             >
-              Coming soon.
+              {renderDecadesInsights()}
             </p>
           </Card>
         </div>

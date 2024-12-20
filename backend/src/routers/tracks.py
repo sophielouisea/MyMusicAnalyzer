@@ -2,8 +2,16 @@ import os
 from typing import Annotated
 from fastapi import APIRouter, Header, Response, status
 from utils.spotify_handler import SpotifyHandler
+from collections import Counter
 
 router = APIRouter(prefix="/tracks", tags=["Tracks"])
+
+
+def get_decade_counts(items: list[dict]):
+    """
+    """
+    get_decade = lambda x: x["album"]["release_date"][:3] + "0"
+    return dict(Counter([get_decade(item) for item in items["items"]]))
 
 
 @router.get("/ping")
@@ -12,17 +20,27 @@ def tracks_ping():
 
 @router.get("/top_tracks")
 def get_top_tracks(token: Annotated[str | None, Header()], response: Response):
+    """
+    """
     if token:
         spotify = SpotifyHandler(token)
-        short_term = spotify.get_top_tracks(limit=20, time_range="short_term")
-        medium_term = spotify.get_top_tracks(limit=20, time_range="medium_term")
-        long_term = spotify.get_top_tracks(limit=20, time_range="long_term")
-        response = {
-            "short_term": short_term,
-            "medium_term": medium_term,
-            "long_term": long_term,
-        }
-        return response
+        return spotify.get_top("tracks")
+    else:
+        response.body = "Please provide a valid token."
+        response.status_code = status.HTTP_401_UNAUTHORIZED
+
+@router.get("/top_decades")
+def get_top_decades(token: Annotated[str | None, Header()], response: Response):
+    """
+    """
+    if token:
+        spotify = SpotifyHandler(token)
+        return spotify.get_top(
+            "tracks",
+            processing_function=get_decade_counts,
+            limit=50,
+            format=False
+        )
     else:
         response.body = "Please provide a valid token."
         response.status_code = status.HTTP_401_UNAUTHORIZED

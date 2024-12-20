@@ -7,10 +7,6 @@ from pydantic import BaseModel
 
 router = APIRouter(prefix="/genres", tags=["Genres"])
 
-@router.get("/ping")
-def artists_ping():
-    return "Ok"
-
 def format_top_genres(top_artists_list):
     all_genres = []
     for item in top_artists_list:
@@ -20,18 +16,19 @@ def format_top_genres(top_artists_list):
     top_genres_sorted = [{"personal_ranking": i+1, "name": v} for i, v in enumerate(top_genres)][:20]
     return top_genres_sorted
 
+@router.get("/ping")
+def artists_ping():
+    return "Ok"
+
 @router.get("/top_genres")
 def get_top_genres(token: Annotated[str | None, Header()], response: Response):
     if token:
         spotify = SpotifyHandler(token)
-        short_term = spotify.get_top_artists(limit=50, time_range="short_term")
-        medium_term = spotify.get_top_artists(limit=50, time_range="medium_term")
-        long_term = spotify.get_top_artists(limit=50, time_range="long_term")
-        return {
-            "short_term": format_top_genres(short_term),
-            "medium_term": format_top_genres(medium_term),
-            "long_term": format_top_genres(long_term),
-        }
+        return spotify.get_top(
+            "artists",
+            processing_function=format_top_genres,
+            limit=50
+        )
     else:
         response.body = "Please provide a valid token."
         response.status_code = status.HTTP_401_UNAUTHORIZED

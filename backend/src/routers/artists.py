@@ -28,14 +28,7 @@ def artists_ping():
 def get_top_artists(token: Annotated[str | None, Header()], response: Response):
     if token:
         spotify = SpotifyHandler(token)
-        short_term = spotify.get_top_artists(limit=20, time_range="short_term")
-        medium_term = spotify.get_top_artists(limit=20, time_range="medium_term")
-        long_term = spotify.get_top_artists(limit=20, time_range="long_term")
-        return {
-            "short_term": short_term,
-            "medium_term": medium_term,
-            "long_term": long_term,
-        }
+        return spotify.get_top("artists", limit=20)
     else:
         response.body = "Please provide a valid token."
         response.status_code = status.HTTP_401_UNAUTHORIZED
@@ -44,19 +37,11 @@ def get_top_artists(token: Annotated[str | None, Header()], response: Response):
 def get_popularity(token: Annotated[str | None, Header()], response: Response):
     if token:
         spotify = SpotifyHandler(token)
-        short_term = spotify.get_top_artists(limit=50, time_range="short_term")
-        medium_term = spotify.get_top_artists(limit=50, time_range="medium_term")
-        long_term = spotify.get_top_artists(limit=50, time_range="long_term")
-        if short_term:
-            res = {
-                "short_term": get_popularity_summary(short_term),
-                "medium_term": get_popularity_summary(medium_term),
-                "long_term": get_popularity_summary(long_term),
-            }
-            print("RES:", res)
-        else:
-            res = {"message": "An error occurred."}
-        return res
+        return spotify.get_top(
+            "artists",
+            processing_function=get_popularity_summary,
+            limit=50
+        )
     else:
         response.body = "Please provide a valid token."
         response.status_code = status.HTTP_401_UNAUTHORIZED

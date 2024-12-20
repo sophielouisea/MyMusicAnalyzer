@@ -4,7 +4,7 @@ import os
 import requests
 from typing import Annotated
 
-from fastapi import APIRouter, Header, HTTPException, Response, status
+from fastapi import APIRouter, Header, HTTPException, Response
 from pydantic import BaseModel
 
 from utils.spotify_handler import SpotifyHandler
@@ -21,25 +21,29 @@ class SpotifyCallbackRequest(BaseModel):
 
 @router.post("/auth")
 def auth(request: SpotifyCallbackRequest):
+    """
+    """
     print("Requesting https://accounts.spotify.com/api/token...")
-
-    token_url = "https://accounts.spotify.com/api/token"
-    data = {
-        "grant_type": "authorization_code",
-        "code": request.code,
-        "redirect_uri": os.environ.get("REDIRECT_URI"),
-    }
     authorization = f"{os.environ.get('CLIENT_ID')}:{os.environ.get('CLIENT_SECRET')}"
     sample_string_bytes = authorization.encode("ascii")
     base64_bytes = base64.b64encode(sample_string_bytes)
     base64_string = base64_bytes.decode("ascii")
+
     expires_time = datetime.now() + timedelta(hours=1)
     expires_timestamp = str(int(expires_time.timestamp()))
-    headers = {
-        "content-type": "application/x-www-form-urlencoded",
-        "Authorization": f"Basic {base64_string}"
-    }
-    response = requests.post(token_url, data=data, headers=headers)
+
+    response = requests.post(
+        "https://accounts.spotify.com/api/token",
+        headers={
+            "content-type": "application/x-www-form-urlencoded",
+            "Authorization": f"Basic {base64_string}"
+        },
+        data={
+            "grant_type": "authorization_code",
+            "code": request.code,
+            "redirect_uri": os.environ.get("REDIRECT_URI"),
+        }
+    )
 
     if response.status_code != 200:
         raise HTTPException(

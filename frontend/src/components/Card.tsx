@@ -17,7 +17,7 @@ const Card = ({ title, className, children }: Props): React.JSX.Element => {
       </div>
       <Divider />
       <div className="card-content">
-        <ScrollPanel style={{ height: "320px" }} className="custombar2">
+        <ScrollPanel style={{ height: "400px" }} className="custombar2">
           {children}
         </ScrollPanel>
       </div>

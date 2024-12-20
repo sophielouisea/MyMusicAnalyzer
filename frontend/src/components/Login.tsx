@@ -1,5 +1,5 @@
 import { ProgressSpinner } from "primereact/progressspinner";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 const SPOTIFY_AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 
 const redirectToSpotifyAuth = () => {
