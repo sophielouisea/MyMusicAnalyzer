@@ -21,7 +21,7 @@ class SpotifyHandler:
                 limit=limit,
                 time_range=time_range
             )
-            print(response)
+
             if format:
                 response[time_range] = self.format_items(response[time_range])
             if processing_function:

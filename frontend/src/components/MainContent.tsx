@@ -40,12 +40,18 @@ const MainContent = (): React.JSX.Element => {
       return (
         <>
           <p className="p-insights">
-            The decades you've been listening to are:
-            {Object.keys(topDecades).map((year, index) =>
-              <li index={index}>{year}</li>)
+            Your top decade is the <b style={{ opacity: 1, color: "white", fontWeight: 600 }}>{topDecades[0].year}'s</b>.
+            <br style={{ marginBottom: "1rem" }}></br>
+            The other decades you have been listening to are:
+            <br></br>
+            {
+              topDecades.slice(1, topDecades.length).map((item, index) =>
+                <span index={index}>
+                  <br></br>
+                  - The {item.year}'s ({Math.round(item.counts / 50 * 100)}%)
+                </span>)
             }
           </p>
-          <p>{JSON.stringify(topDecades)}</p>
         </>
       )
     }
@@ -114,16 +120,7 @@ const MainContent = (): React.JSX.Element => {
             {renderPopularityInsights()}
           </Card>
           <Card title="Your musical period" className="card-double">
-            <p
-              style={{
-                opacity: 0.5,
-                fontSize: 14,
-                textAlign: "left",
-                marginLeft: "1rem",
-              }}
-            >
-              {renderDecadesInsights()}
-            </p>
+            {renderDecadesInsights()}
           </Card>
         </div>
       </ScrollPanel>

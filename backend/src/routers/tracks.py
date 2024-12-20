@@ -11,7 +11,10 @@ def get_decade_counts(items: list[dict]):
     """
     """
     get_decade = lambda x: x["album"]["release_date"][:3] + "0"
-    return dict(Counter([get_decade(item) for item in items["items"]]))
+    decade_counts =  dict(Counter([get_decade(item) for item in items["items"]]))
+    sorted_counts = dict(sorted(decade_counts.items(), key=lambda x: x[1], reverse=True))
+    res = [{"year": k, "counts": v} for k, v in sorted_counts.items()]
+    return res
 
 
 @router.get("/ping")
