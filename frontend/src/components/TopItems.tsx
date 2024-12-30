@@ -3,15 +3,13 @@ import "primeicons/primeicons.css";
 import { Divider } from "primereact/divider";
 import { ArtistItem, TrackItem } from "@/types";
 import { Image } from "primereact/image";
-import Card from "./Card";
 
 type CardProps = {
-  title?: string;
   items?: ArtistItem[] | TrackItem[];
+  numItems?: number;
 };
 
-const TopCard = ({ title, items }: CardProps): React.JSX.Element => {
-  const numItems = 20;
+const TopItems = ({ items, numItems = 20 }: CardProps): React.JSX.Element => {
 
   const renderItem = (item: ArtistItem | TrackItem) => {
     return (
@@ -21,7 +19,6 @@ const TopCard = ({ title, items }: CardProps): React.JSX.Element => {
             marginBlock: "0rem",
             marginTop: "-1rem",
             marginInline: "1rem",
-            fontSize: "15px",
             textAlign: "left",
             opacity: "80%",
             alignItems: "center",
@@ -44,12 +41,12 @@ const TopCard = ({ title, items }: CardProps): React.JSX.Element => {
   };
 
   return (
-    <Card title={title || ""} className="card">
+    <>
       {items
         ?.slice(0, numItems)
         .map((item, index) => <p key={index}>{renderItem(item)}</p>) || ""}
-    </Card>
+    </>
   );
 };
 
-export default TopCard;
+export default TopItems;
