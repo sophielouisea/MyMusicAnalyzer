@@ -30,7 +30,7 @@ function DownloadSummaryModal(): React.JSX.Element {
 
   const SummaryCard = () => {
     const currentDate = new Date().toLocaleString(
-      "default", { month: "long", year: "numeric" }
+      "default", { day: "numeric", month: "long", year: "numeric" }
     );
 
     const timeRange = useSelector((state: RootState) => state.views.timeRange);
