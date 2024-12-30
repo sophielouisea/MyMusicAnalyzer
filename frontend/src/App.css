@@ -161,9 +161,8 @@ body {
   background-color: #1c1c1c;
   border-radius: 10px;
   color: #ffffff;
-  font-size: 18px;
+  font-size: 15px;
   text-align: center;
-  /* height: 390px; */
   flex-direction: column;
   grid-column: span 2;
 }
@@ -172,7 +171,7 @@ body {
   background-color: #1c1c1c;
   border-radius: 10px;
   color: #ffffff;
-  font-size: 18px;
+  font-size: 15px;
   text-align: center;
   height: 310px;
   flex-direction: column;
@@ -253,15 +252,20 @@ body {
 
 .modal {
   background-color: #836eff;
-  width: 600px;
+  width: 700px;
   padding: 20px;
   box-shadow: 0 0 0 50vmax rgba(0, 0, 0, .5);
 }
 .summary-card {
   background-color: #836eff;
-  width: 500px;
+  width: 650px;
   padding: 20px;
   font-size: 18px;
+}
+.summary-column {
+  font-size: 13px;
+  margin-left: -1rem;
+  width: 210px;
 }
 .p-dialog-header-close-icon {
   color: #fff;

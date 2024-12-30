@@ -36,12 +36,22 @@ const SummaryCard = () => {
     <div className="summary-card" style={{fontSize: "15px"}}>
       <p>What you’ve been listening to over the past {months}...</p>
       <Divider />
-      <TopItems items={topArtists} numItems={20}/>
+      <div style={{display: "flex", justifyContent: "space-between"}}>
+        <div className="summary-column">
+          <TopItems items={topArtists} numItems={5} />
+        </div>
+        <div className="summary-column">
+          <TopItems items={topTracks} numItems={5} />
+        </div>
+        <div className="summary-column">
+          <TopItems items={topGenres} numItems={5} />
+        </div>
+      </div>
       <Divider />
-      <TopDecadesInsights />
-      <Divider />
-      <PopularityInsights />
-      <Divider />
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <TopDecadesInsights />
+        <PopularityInsights />
+      </div>
     </div>
   )
 }

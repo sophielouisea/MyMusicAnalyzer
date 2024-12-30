@@ -19,7 +19,6 @@ const TopItems = ({ items, numItems = 20 }: CardProps): React.JSX.Element => {
             marginBlock: "0rem",
             marginTop: "-1rem",
             marginInline: "1rem",
-            fontSize: "15px",
             textAlign: "left",
             opacity: "80%",
             alignItems: "center",

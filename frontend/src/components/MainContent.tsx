@@ -59,12 +59,12 @@ const MainContent = (): React.JSX.Element => {
               Spotify classifies artists' popularity on a 0 (least popular) to
               100 (most popular) scale.
             </p>
-            <div style={{padding: "22px", fontSize: "18px", lineHeight: "25px"}}>
+            <div style={{padding: "22px", lineHeight: "25px"}}>
               <PopularityInsights />
             </div>
           </Card>
           <Card title="Your musical period" className="card-double">
-            <div style={{ padding: "22px", fontSize: "18px", lineHeight: "25px" }}>
+            <div style={{ padding: "22px", lineHeight: "25px" }}>
               <TopDecadesInsights />
             </div>
           </Card>
