@@ -1,5 +1,5 @@
 import { AppDispatch, RootState } from "@/state/store";
-import { setTimeRangeView } from "@/state/viewsSlice";
+import { setTimeRangeView, setVisibleDownloadSummaryModal } from "@/state/viewsSlice";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -42,7 +42,10 @@ const Sidebar = (): React.JSX.Element => {
           Past year
         </button>
       </div>
-      <button className="download-summary" onClick={() => {}}>
+      <button
+        className="download-summary"
+        onClick={() => {dispatch(setVisibleDownloadSummaryModal(true))}}
+      >
         Download summary
       </button>
     </div>
