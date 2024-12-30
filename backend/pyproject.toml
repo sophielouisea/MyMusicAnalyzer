@@ -7,6 +7,7 @@ readme = "README.md"
 packages = [
   {include = "routers", from="./src/"},
   {include = "utils", from="./src/"},
+  {include = "tests", from="./src/"},
 ]
 
 [tool.poetry.dependencies]

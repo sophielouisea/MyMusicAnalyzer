@@ -1,28 +1,15 @@
-import os
 from typing import Annotated
 from fastapi import APIRouter, Header, Response, status
 from utils.spotify_handler import SpotifyHandler
-from pydantic import BaseModel
-import numpy as np
+from utils.utils import get_popularity_summary
 
 router = APIRouter(prefix="/artists", tags=["Artists"])
 
-def get_popularity_summary(top_artists: dict):
-    artists = {artist["name"]: artist["popularity"] for artist in top_artists}
-    popularity_scores = np.array(list(artists.values()))
-    imax = int(np.argmax(popularity_scores))
-    imin = int(np.argmin(popularity_scores))
-    return {
-        "average_index": int(np.mean(popularity_scores)),
-        "lowest": list(artists.items())[imin][0],
-        "lowest_index": list(artists.items())[imin][1],
-        "highest": list(artists.items())[imax][0],
-        "highest_index": list(artists.items())[imax][1],
-    }
 
 @router.get("/ping")
 def artists_ping():
     return "Ok"
+
 
 @router.get("/top_artists")
 def get_top_artists(token: Annotated[str | None, Header()], response: Response):
@@ -33,6 +20,7 @@ def get_top_artists(token: Annotated[str | None, Header()], response: Response):
         response.body = "Please provide a valid token."
         response.status_code = status.HTTP_401_UNAUTHORIZED
 
+
 @router.get("/popularity")
 def get_popularity(token: Annotated[str | None, Header()], response: Response):
     if token:
@@ -42,6 +30,15 @@ def get_popularity(token: Annotated[str | None, Header()], response: Response):
             processing_function=get_popularity_summary,
             limit=50
         )
+    else:
+        response.body = "Please provide a valid token."
+        response.status_code = status.HTTP_401_UNAUTHORIZED
+
+@router.get("/top_artists_raw")
+def get_top_artists_raw(token: Annotated[str | None, Header()], response: Response):
+    if token:
+        spotify = SpotifyHandler(token)
+        return spotify._get("me/top/artists", limit=2, time_range="short_term")
     else:
         response.body = "Please provide a valid token."
         response.status_code = status.HTTP_401_UNAUTHORIZED
