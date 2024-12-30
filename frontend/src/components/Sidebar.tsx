@@ -13,6 +13,7 @@ const Sidebar = (): React.JSX.Element => {
       : "sidebar-button";
   };
 
+  // TODO: implement summary download
   return (
     <div className="sidebar">
       <div>
@@ -41,8 +42,8 @@ const Sidebar = (): React.JSX.Element => {
           Past year
         </button>
       </div>
-      <button className="enable-trends" onClick={() => {}}>
-        Enable trends
+      <button className="download-summary" onClick={() => {}}>
+        Download summary
       </button>
     </div>
   );

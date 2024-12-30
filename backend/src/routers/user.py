@@ -9,19 +9,22 @@ from pydantic import BaseModel
 
 from utils.spotify_handler import SpotifyHandler
 
-router = APIRouter(prefix="/user", tags=["User"])
 
-@router.get("/ping")
-def auth_ping():
-    return "Ok"
+router = APIRouter(prefix="/user", tags=["User"])
 
 
 class SpotifyCallbackRequest(BaseModel):
     code: str
 
+
 @router.post("/auth")
 def auth(request: SpotifyCallbackRequest):
     """
+    Get the user's Spotify access token and expiry timestamp for the 'My Music
+    Analyzer' app.
+
+    The body of the request must contain the authorization code from the
+    auth flow initiated in the frontend.
     """
     print("Requesting https://accounts.spotify.com/api/token...")
     authorization = f"{os.environ.get('CLIENT_ID')}:{os.environ.get('CLIENT_SECRET')}"
@@ -55,8 +58,15 @@ def auth(request: SpotifyCallbackRequest):
     token_info["expires_at"] = expires_timestamp
     return token_info
 
+
 @router.get("/details")
 def user_details(token: Annotated[str | None, Header()], response: Response):
+    """
+    Get a user's Spotify user details.
+
+    The request header must contain user's Spotify access token (expires every
+    hour).
+    """
     spotify = SpotifyHandler(token)
     response = spotify.get_user_details()
     return response

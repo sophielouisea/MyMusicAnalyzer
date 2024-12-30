@@ -121,7 +121,7 @@ body {
   margin-block: 0.5rem;
 }
 
-.enable-trends {
+.download-summary {
   background-color: #6a3ef9;
   color: #ffffff;
   padding: 15px 20px;
@@ -132,7 +132,7 @@ body {
   cursor: pointer;
 }
 
-.enable-trends:hover {
+.download-summary:hover {
   background-color: #836eff;
 }
 
