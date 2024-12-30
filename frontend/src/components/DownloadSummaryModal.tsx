@@ -8,6 +8,7 @@ import PopularityInsights from './PopularityInsights';
 import { Divider } from 'primereact/divider';
 import TopCard from './TopItems';
 import TopItems from './TopItems';
+import Button from './Button';
 
 const SummaryCard = () => {
   const timeRange = useSelector((state: RootState) => state.views.timeRange);
@@ -50,6 +51,7 @@ const SummaryCard = () => {
       <Divider />
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <TopDecadesInsights />
+        <div style={{width: "2rem"}}></div>
         <PopularityInsights />
       </div>
     </div>
@@ -72,6 +74,7 @@ function DownloadSummaryModal(): React.JSX.Element {
       className="modal"
     >
       <SummaryCard />
+        <button className="download-summary">Download</button>
     </Dialog>
   )
 }

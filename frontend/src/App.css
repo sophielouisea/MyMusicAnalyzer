@@ -89,6 +89,7 @@ body {
   height: 83vh;
   margin-top: 0;
   margin-inline: 2rem;
+  font-size: 16px;
 }
 
 .sidebar-button {
@@ -122,18 +123,18 @@ body {
 }
 
 .download-summary {
-  background-color: #6a3ef9;
+  background-color: #836eff;
   color: #ffffff;
   padding: 15px 20px;
   border-radius: 25px;
   font-weight: bold;
-  font-size: 16px;
   border: none;
   cursor: pointer;
+  font-size: inherit;
 }
 
 .download-summary:hover {
-  background-color: #836eff;
+  background-color: #6a3ef9;
 }
 
 .main-content {

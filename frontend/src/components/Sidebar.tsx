@@ -16,7 +16,7 @@ const Sidebar = (): React.JSX.Element => {
   // TODO: implement summary download
   return (
     <div className="sidebar">
-      <div>
+      <div style={{fontSize: "16px"}}>
         <button
           className={getClassName("short_term")}
           onClick={() => {
