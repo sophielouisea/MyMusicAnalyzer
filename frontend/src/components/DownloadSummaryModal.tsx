@@ -60,7 +60,7 @@ function DownloadSummaryModal(): React.JSX.Element {
       <div
         id="summary"
         className="summary-card"
-        style={{ fontSize: "15px", letterSpacing: "0.8px" }}
+        style={{ fontSize: "16px", letterSpacing: "0.8px" }}
       >
         <p style={{ fontWeight: 100, marginBottom: "1rem" }}>{currentDate}</p>
         <p>What you’ve been listening to over the past {months}...</p>
