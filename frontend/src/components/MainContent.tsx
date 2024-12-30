@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import TopCard from "./TopCard";
+import TopItems from "./TopItems";
 import Card from "./Card";
 import { ScrollPanel } from "primereact/scrollpanel";
 import { useDispatch, useSelector } from "react-redux";
@@ -37,9 +37,15 @@ const MainContent = (): React.JSX.Element => {
     <div className="main-content">
       <ScrollPanel style={{ width: "80rem", height: "52rem" }}>
         <div className="main-scrollpanel">
-          <TopCard title="Your top artists" items={topArtists} />
-          <TopCard title="Your top tracks" items={topTracks} />
-          <TopCard title="Your top genres" items={topGenres} />
+          <Card title={"Your top artists"} className="card">
+            <TopItems items={topArtists} />
+          </Card>
+          <Card title={"Your top tracks"} className="card">
+            <TopItems items={topTracks} />
+          </Card>
+          <Card title={"Your top genres"} className="card">
+            <TopItems items={topGenres} />
+          </Card>
           <Card title="Popularity" className="card-double">
             <p
               style={{
@@ -50,13 +56,17 @@ const MainContent = (): React.JSX.Element => {
                 marginBottom: "0",
               }}
             >
-              Spotify classifies artists' popularity on a 0 (least popular) to 100
-              (most popular) scale.
+              Spotify classifies artists' popularity on a 0 (least popular) to
+              100 (most popular) scale.
             </p>
-            <PopularityInsights />
+            <div style={{padding: "22px", fontSize: "18px", lineHeight: "25px"}}>
+              <PopularityInsights />
+            </div>
           </Card>
           <Card title="Your musical period" className="card-double">
-            <TopDecadesInsights />
+            <div style={{ padding: "22px", fontSize: "18px", lineHeight: "25px" }}>
+              <TopDecadesInsights />
+            </div>
           </Card>
         </div>
       </ScrollPanel>
