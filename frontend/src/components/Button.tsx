@@ -12,7 +12,7 @@ const Button: React.FC<ButtonProps> = ({
   variant = "secondary",
 }): React.JSX.Element => {
   const buttonClass =
-    variant === "primary" ? "enable-trends" : "sidebar-button";
+    variant === "primary" ? "download-summary" : "sidebar-button";
   return (
     <button className={buttonClass} onClick={onClick}>
       {label}

@@ -1,4 +1,3 @@
-import os
 from fastapi import FastAPI, responses
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -13,7 +12,10 @@ api = FastAPI()
 
 api.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:*/"],
+    allow_origins=[
+        "http://localhost:*/",
+        "https://cool-vacherin-b978f6.netlify.app/"
+    ],
     allow_methods=["*"],
     allow_credentials=True,
     allow_headers=["*"]
