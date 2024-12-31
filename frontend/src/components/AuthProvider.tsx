@@ -37,7 +37,7 @@ function AuthProvider({ children }: Props): React.JSX.Element {
     };
 
     try {
-      const response = await fetch(apiUrl + "/ping?user_name=sophie", requestConfig);
+      const response = await fetch(apiUrl + "ping?user_name=sophie", requestConfig);
       if (response.ok) {
         const res = response.json()
         console.log("RES:", res);
