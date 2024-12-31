@@ -109,8 +109,9 @@ export const userSessionSlice = createSlice({
     });
 
     builder.addCase(authenticateUser.fulfilled, (state) => {
-      setFulfilled(state, "authenticateUser");
       state.data.isAuthenticated = true;
+      state.data.hasValidToken = true;
+      setFulfilled(state, "authenticateUser");
     });
 
     builder.addCase(authenticateUser.rejected, (state) => {
