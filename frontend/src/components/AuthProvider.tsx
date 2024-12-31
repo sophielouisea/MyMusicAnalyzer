@@ -36,15 +36,21 @@ function AuthProvider({ children }: Props): React.JSX.Element {
       },
     };
 
-    fetch(apiUrl + "ping?user_name=sophie", requestConfig).then((res) => {
-      setMessage(JSON.stringify(res.json()));
-    }).catch((err) => { console.log("Error:", err)});
+    const res = await fetch(apiUrl + "ping?user_name=sophie", requestConfig)
+    if (res.ok) {
+      const resJson = await res.json();
+      console.log("RES:", resJson)
+      setMessage(resJson)
+    } else {
+      console.log("ERR")
+    }
   }
   useEffect(() => {
     pingApi()
   }, [])
 
   if (hasValidToken === false) {
+    console.log(message)
     return <p>Message: {message}</p>
     {/* // return <Navigate to="/login" />; */}
   } else if (hasValidToken === true) {
