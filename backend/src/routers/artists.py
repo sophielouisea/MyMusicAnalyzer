@@ -36,9 +36,7 @@ def get_popularity(token: Annotated[str | None, Header()], response: Response):
     if token:
         spotify = SpotifyHandler(token)
         return spotify.get_top(
-            "artists",
-            processing_function=get_popularity_summary,
-            limit=50
+            "artists", processing_function=get_popularity_summary, limit=50
         )
     else:
         response.body = "Please provide a valid token."
@@ -46,8 +44,7 @@ def get_popularity(token: Annotated[str | None, Header()], response: Response):
 
 
 @router.get("/top_artists_raw")
-def get_top_artists_raw(token: Annotated[str | None, Header()],
-                        response: Response):
+def get_top_artists_raw(token: Annotated[str | None, Header()], response: Response):
     """
     Get a Spotify user's top 20 artists over the past month. Returns the raw
     result.

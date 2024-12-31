@@ -15,7 +15,7 @@ api.add_middleware(
     allow_origins=["*"],
     allow_methods=["*"],
     allow_credentials=True,
-    allow_headers=["*"]
+    allow_headers=["*"],
 )
 
 

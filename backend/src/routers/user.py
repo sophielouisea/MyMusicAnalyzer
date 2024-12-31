@@ -39,23 +39,20 @@ def auth(request: SpotifyCallbackRequest):
         "https://accounts.spotify.com/api/token",
         headers={
             "content-type": "application/x-www-form-urlencoded",
-            "Authorization": f"Basic {base64_string}"
+            "Authorization": f"Basic {base64_string}",
         },
         data={
             "grant_type": "authorization_code",
             "code": request.code,
             "redirect_uri": os.environ.get("REDIRECT_URI"),
-        }
+        },
     )
 
     if response.status_code != 200:
         print("Redirect URI:", os.environ.get("REDIRECT_URI"))
         print(f"Error requesting token: {response.status_code}")
         print(response.json())
-        raise HTTPException(
-            status_code=response.status_code,
-            detail=response.json()
-        )
+        raise HTTPException(status_code=response.status_code, detail=response.json())
 
     token_info = response.json()
     token_info["expires_at"] = expires_timestamp

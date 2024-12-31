@@ -21,7 +21,7 @@ def format_top_genres(top_artists: list[dict]) -> list[dict]:
 
     top_genres_sorted = []
     for i, v in enumerate(top_genres):
-        top_genres_sorted.append({"personal_ranking": i+1, "name": v})
+        top_genres_sorted.append({"personal_ranking": i + 1, "name": v})
 
     return top_genres_sorted[:20]
 
@@ -37,14 +37,8 @@ def get_decade_counts(top_tracks: list[dict]) -> list[dict]:
         A sorted list of dictionaries, ranking the user's top decades.
     """
     get_decade = lambda x: x["album"]["release_date"][:3] + "0"
-    decade_counts =  dict(Counter([
-        get_decade(item) for item in top_tracks["items"]
-    ]))
-    sorted_counts = sorted(
-        decade_counts.items(),
-        key=lambda x: x[1],
-        reverse=True
-    )
+    decade_counts = dict(Counter([get_decade(item) for item in top_tracks["items"]]))
+    sorted_counts = sorted(decade_counts.items(), key=lambda x: x[1], reverse=True)
     return [{"year": k, "counts": v} for k, v in dict(sorted_counts).items()]
 
 

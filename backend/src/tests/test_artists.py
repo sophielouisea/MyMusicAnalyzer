@@ -2,6 +2,7 @@ from utils.utils import get_popularity_summary
 from utils.spotify_handler import SpotifyHandler
 from tests.fixtures import formatted_artist_items, raw_artist_items
 
+
 def test_format_items(raw_artist_items, formatted_artist_items):
     spotify = SpotifyHandler("_")
     assert spotify.format_items(raw_artist_items) == formatted_artist_items

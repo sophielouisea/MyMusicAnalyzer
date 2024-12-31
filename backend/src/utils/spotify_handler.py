@@ -1,6 +1,7 @@
 import requests
 from typing import Callable, Literal, Optional
 
+
 class SpotifyHandler:
     def __init__(self, token: str):
         self._token = token
@@ -11,9 +12,13 @@ class SpotifyHandler:
         """
         raise NotImplementedError()
 
-    def get_top(self, type: Literal["artists", "tracks"], limit: int = 20,
-                processing_function: Optional[Callable] = None,
-                format_items: bool = True) -> dict:
+    def get_top(
+        self,
+        type: Literal["artists", "tracks"],
+        limit: int = 20,
+        processing_function: Optional[Callable] = None,
+        format_items: bool = True,
+    ) -> dict:
         """
         Get the top Sportify items of a given type, over the short, medium and
         long term (1, 6, and 12 months, respectively).
@@ -34,9 +39,7 @@ class SpotifyHandler:
         response = {}
         for time_range in ["short_term", "medium_term", "long_term"]:
             response[time_range] = self._get(
-                f"me/top/{type}",
-                limit=limit,
-                time_range=time_range
+                f"me/top/{type}", limit=limit, time_range=time_range
             )
 
             if format_items:
@@ -70,10 +73,8 @@ class SpotifyHandler:
         """
         response = requests.get(
             url="https://api.spotify.com/v1/" + url_path,
-            headers={
-                "Authorization": f"Bearer {self._token}"
-            },
-            params=params | {}
+            headers={"Authorization": f"Bearer {self._token}"},
+            params=params | {},
         )
         if response.ok:
             return response.json()
@@ -93,7 +94,7 @@ class SpotifyHandler:
         Returns:
             The formatted list of items.
         """
-        type = items['items'][0]["type"]
+        type = items["items"][0]["type"]
         if type == "artist":
             format_fct = self.format_artist_item
         elif type == "track":
@@ -116,5 +117,5 @@ class SpotifyHandler:
             "artist": item["artists"][0]["name"],
             "popularity": item["popularity"],
             "image": item["album"]["images"][2]["url"],
-            "personal_ranking": rank
+            "personal_ranking": rank,
         }

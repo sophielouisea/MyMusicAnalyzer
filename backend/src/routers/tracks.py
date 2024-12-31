@@ -39,7 +39,7 @@ def get_top_decades(token: Annotated[str | None, Header()], response: Response):
             "tracks",
             processing_function=get_decade_counts,
             limit=50,
-            format_items=False
+            format_items=False,
         )
     else:
         response.body = "Please provide a valid token."

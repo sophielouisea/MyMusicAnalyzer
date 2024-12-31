@@ -19,9 +19,7 @@ def get_top_genres(token: Annotated[str | None, Header()], response: Response):
     if token:
         spotify = SpotifyHandler(token)
         return spotify.get_top(
-            "artists",
-            processing_function=format_top_genres,
-            limit=50
+            "artists", processing_function=format_top_genres, limit=50
         )
     else:
         response.body = "Please provide a valid token."
