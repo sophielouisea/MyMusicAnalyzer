@@ -26,13 +26,17 @@ function AuthProvider({ children }: Props): React.JSX.Element {
     }
   }, [hasValidToken]);
 
+  useEffect(() => {
+    window.localStorage.setItem("spotifyTokenExpiry", "test");
+  }, [])
+
   const getValue = async () => {
     const tokenExpiry = await window.localStorage.getItem("spotifyTokenExpiry");
     return tokenExpiry
   }
 
   if (hasValidToken === false) {
-    return <p>Token expiry timestamp: {getValue()}</p>
+    return <p>Hello!</p>
     {/* // return <Navigate to="/login" />; */}
   } else if (hasValidToken === true) {
     return <> {children} </>;
