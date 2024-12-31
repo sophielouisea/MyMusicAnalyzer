@@ -49,6 +49,8 @@ def auth(request: SpotifyCallbackRequest):
     )
 
     if response.status_code != 200:
+        print(f"Error requesting token: {response.status_code}")
+        print(response.json)
         raise HTTPException(
             status_code=response.status_code,
             detail=response.json()
