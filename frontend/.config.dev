@@ -1,5 +1,0 @@
-VITE_CLIENT_ID='cb2a7efc00394a5491b578c982200532'
-VITE_ENV='dev'
-VITE_REDIRECT_URI='https://cool-vacherin-b978f6.netlify.app/callback'
-VITE_SCOPES='user-read-email user-library-read user-top-read user-read-recently-played'
-VITE_FASTAPI_URL='https://mymusicanalyzer.onrender.com/'
