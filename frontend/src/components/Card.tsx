@@ -1,16 +1,25 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import "primeicons/primeicons.css";
+import { Divider } from "primereact/divider";
+import { ScrollPanel } from "primereact/scrollpanel";
 
-type CardProps = {
-  title?: string;
+type Props = {
+  title: string;
+  className: string;
+  children: ReactNode;
 };
 
-const Card: React.FC<CardProps> = ({ title }): React.JSX.Element => {
+const Card = ({ title, className, children }: Props): React.JSX.Element => {
   return (
-    <div className="card">
+    <div className={className || "card"}>
       <div className="card-header">
-        {title || "Empty Card"}
-        <i className="pi pi-arrow-up-right-and-arrow-down-left-from-center icon-button"></i>
+        <p style={{ marginTop: "0rem" }}>{title}</p>
+      </div>
+      <Divider />
+      <div className="card-content">
+        <ScrollPanel style={{ height: "400px" }} className="custombar2">
+          {children}
+        </ScrollPanel>
       </div>
     </div>
   );
