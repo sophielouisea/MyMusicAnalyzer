@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/state/store";
@@ -15,6 +15,7 @@ function AuthProvider({ children }: Props): React.JSX.Element {
   const hasValidToken = useSelector(
     (state: RootState) => state.userSession.data.hasValidToken,
   );
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     dispatch(checkHasValidToken());
@@ -26,17 +27,32 @@ function AuthProvider({ children }: Props): React.JSX.Element {
     }
   }, [hasValidToken]);
 
+  const pingApi = async () => {
+    const apiUrl = import.meta.env.VITE_FASTAPI_URL;
+    const requestConfig = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const response = await fetch(apiUrl + "/ping?user_name=sophie", requestConfig);
+      if (response.ok) {
+        const res = response.json()
+        console.log("RES:", res);
+        setMessage(JSON.stringify(res))
+      }
+    } catch (error) {
+      console.log("Error getting user details:", error);
+    }
+  }
   useEffect(() => {
-    window.localStorage.setItem("spotifyTokenExpiry", "test");
+    pingApi()
   }, [])
 
-  const getValue = async () => {
-    const tokenExpiry = await window.localStorage.getItem("spotifyTokenExpiry");
-    return tokenExpiry
-  }
-
   if (hasValidToken === false) {
-    return <p>Hello!</p>
+    return <p>Message: {message}</p>
     {/* // return <Navigate to="/login" />; */}
   } else if (hasValidToken === true) {
     return <> {children} </>;
