@@ -37,7 +37,6 @@ function AuthProvider({ children }: Props): React.JSX.Element {
     };
 
     fetch(apiUrl + "ping?user_name=sophie", requestConfig).then((res) => {
-      console.log(res.json())
       setMessage(JSON.stringify(res.json()));
     }).catch((err) => { console.log("Error:", err)});
   }
