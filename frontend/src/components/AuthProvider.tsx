@@ -15,7 +15,6 @@ function AuthProvider({ children }: Props): React.JSX.Element {
   const hasValidToken = useSelector(
     (state: RootState) => state.userSession.data.hasValidToken,
   );
-  const [message, setMessage] = useState("");
 
   useEffect(() => {
     dispatch(checkHasValidToken());
@@ -27,32 +26,8 @@ function AuthProvider({ children }: Props): React.JSX.Element {
     }
   }, [hasValidToken]);
 
-  const pingApi = async () => {
-    const apiUrl = import.meta.env.VITE_FASTAPI_URL;
-    const requestConfig = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
-    const res = await fetch(apiUrl + "ping?user_name=sophie", requestConfig)
-    if (res.ok) {
-      const resJson = await res.json();
-      console.log("RES:", resJson)
-      setMessage(resJson)
-    } else {
-      console.log("ERR")
-    }
-  }
-  useEffect(() => {
-    pingApi()
-  }, [])
-
   if (hasValidToken === false) {
-    console.log(message)
-    return <p>Message: {message}</p>
-    {/* // return <Navigate to="/login" />; */}
+    return <Navigate to="/login" />;
   } else if (hasValidToken === true) {
     return <> {children} </>;
   } else {

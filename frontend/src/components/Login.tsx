@@ -3,7 +3,7 @@ import { useEffect } from "react";
 const SPOTIFY_AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 
 const redirectToSpotifyAuth = () => {
-  const state = generateRandomString(16);
+  const state = "mma24";
   const params = new URLSearchParams({
     client_id: import.meta.env.VITE_CLIENT_ID,
     response_type: "code",

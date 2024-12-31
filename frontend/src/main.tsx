@@ -9,7 +9,7 @@ import SpotifyCallback from "./components/SpotifyCallback";
 import { store } from "./state/store.ts";
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
+  // <StrictMode>
     <ReduxProvider store={store}>
       <Router>
         <Routes>
@@ -26,5 +26,5 @@ createRoot(document.getElementById("root")!).render(
         </Routes>
       </Router>
     </ReduxProvider>
-  </StrictMode>,
+  // </StrictMode>,
 );

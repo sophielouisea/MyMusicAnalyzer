@@ -12,6 +12,10 @@ const SpotifyCallback = () => {
     (state: RootState) => state.userSession.data.isAuthenticated,
   );
 
+  const isLoading = useSelector(
+    (state: RootState) => state.userSession.isLoading,
+  );
+
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const code = searchParams.get("code");
@@ -21,11 +25,12 @@ const SpotifyCallback = () => {
     }
   }, []);
 
-  if (isAuthenticated) {
+  console.log("SpotifyCallback...");
+  if (isAuthenticated && !isLoading) {
     navigate("/");
+    return;
   }
 
-  console.log("SpotifyCallback...");
   return (
     <ProgressSpinner className="loading-spinner" animationDuration=".5s" />
   );
