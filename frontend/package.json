@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "set -a && source .env.dev && echo $VITE_ENV && vite",
+    "local": "set -a && source .config.local && echo $VITE_ENV && vite",
     "checks": "tsc -b && vitest run && yarn prettier . --write",
-    "build": "set -a && source .env.prod && echo $VITE_ENV && tsc -b && vite build",
+    "build": "set -a && source .config.dev && echo $VITE_ENV && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest"

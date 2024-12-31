@@ -19,8 +19,8 @@ function TopDecadesInsights(): React.JSX.Element {
           .<br style={{ marginBottom: "1rem" }}></br>
           The other decades you have been listening to are:
           <br></br>
-          {topDecades.slice(1, topDecades.length).map((item, index) => (
-            <span index={index}>
+          {topDecades.slice(1, topDecades.length).map((item: any, index: number) => (
+            <span data-index={index}>
               <br></br>- The {item.year}'s (
               {Math.round((item.counts / 50) * 100)}%)
             </span>
