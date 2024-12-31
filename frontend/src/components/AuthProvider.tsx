@@ -36,16 +36,10 @@ function AuthProvider({ children }: Props): React.JSX.Element {
       },
     };
 
-    try {
-      const response = await fetch(apiUrl + "ping?user_name=sophie", requestConfig);
-      if (response.ok) {
-        const res = response.json()
-        console.log("RES:", res);
-        setMessage(JSON.stringify(res))
-      }
-    } catch (error) {
-      console.log("Error getting user details:", error);
-    }
+    fetch(apiUrl + "ping?user_name=sophie", requestConfig).then((res) => {
+      console.log(res.json())
+      setMessage(JSON.stringify(res.json()));
+    }).catch((err) => { console.log("Error:", err)});
   }
   useEffect(() => {
     pingApi()
