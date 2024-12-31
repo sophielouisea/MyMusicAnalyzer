@@ -49,8 +49,9 @@ def auth(request: SpotifyCallbackRequest):
     )
 
     if response.status_code != 200:
+        print("Redirect URI:", os.environ.get("REDIRECT_URI"))
         print(f"Error requesting token: {response.status_code}")
-        print(response.json)
+        print(response.json())
         raise HTTPException(
             status_code=response.status_code,
             detail=response.json()
