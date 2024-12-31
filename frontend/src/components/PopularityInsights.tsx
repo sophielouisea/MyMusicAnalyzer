@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/state/store";
 
@@ -38,6 +38,6 @@ function PopularityInsights(): React.JSX.Element {
     );
   }
   return <></>;
-};
+}
 
 export default PopularityInsights;

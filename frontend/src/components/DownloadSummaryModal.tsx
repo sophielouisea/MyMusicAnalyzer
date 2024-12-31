@@ -1,27 +1,32 @@
-import { AppDispatch, RootState } from '@/state/store';
-import { setVisibleDownloadSummaryModal } from '@/state/viewsSlice';
-import { Dialog } from 'primereact/dialog';
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import TopDecadesInsights from './TopDecadesInsights';
-import PopularityInsights from './PopularityInsights';
-import { Divider } from 'primereact/divider';
-import TopItems from './TopItems';
-import html2canvas from 'html2canvas';
+import { AppDispatch, RootState } from "@/state/store";
+import { setVisibleDownloadSummaryModal } from "@/state/viewsSlice";
+import { Dialog } from "primereact/dialog";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import TopDecadesInsights from "./TopDecadesInsights";
+import PopularityInsights from "./PopularityInsights";
+import { Divider } from "primereact/divider";
+import TopItems from "./TopItems";
+import html2canvas from "html2canvas";
 
 function DownloadSummaryModal(): React.JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
-  const visible = useSelector((state: RootState) =>
-    state.views.visibleDownloadSummaryModal)
+  const visible = useSelector(
+    (state: RootState) => state.views.visibleDownloadSummaryModal,
+  );
 
   const handleDownloadImage = async (elementId: string) => {
     const element = document.getElementById(elementId),
-      canvas = await html2canvas(element as HTMLElement, { allowTaint: true, useCORS: true, logging: true }),
-    data = canvas.toDataURL('image/jpg'),
-    link = document.createElement('a');
+      canvas = await html2canvas(element as HTMLElement, {
+        allowTaint: true,
+        useCORS: true,
+        logging: true,
+      }),
+      data = canvas.toDataURL("image/jpg"),
+      link = document.createElement("a");
 
     link.href = data;
-    link.download = 'spotify_summary.jpg';
+    link.download = "spotify_summary.jpg";
 
     document.body.appendChild(link);
     link.click();
@@ -29,13 +34,16 @@ function DownloadSummaryModal(): React.JSX.Element {
   };
 
   const SummaryCard = () => {
-    const currentDate = new Date().toLocaleString(
-      "default", { day: "numeric", month: "long", year: "numeric" }
-    );
+    const currentDate = new Date().toLocaleString("default", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
 
     const timeRange = useSelector((state: RootState) => state.views.timeRange);
     const topArtists = useSelector(
-      (state: RootState) => state.artists.data[timeRange]);
+      (state: RootState) => state.artists.data[timeRange],
+    );
     const topTracks = useSelector(
       (state: RootState) => state.tracks.data[timeRange],
     );
@@ -85,8 +93,8 @@ function DownloadSummaryModal(): React.JSX.Element {
           <PopularityInsights />
         </div>
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <Dialog
@@ -99,9 +107,14 @@ function DownloadSummaryModal(): React.JSX.Element {
       className="modal"
     >
       <SummaryCard />
-      <button className="download-summary" onClick={() => handleDownloadImage("summary")}>Download</button>
+      <button
+        className="download-summary"
+        onClick={() => handleDownloadImage("summary")}
+      >
+        Download
+      </button>
     </Dialog>
-  )
+  );
 }
 
 export default DownloadSummaryModal;

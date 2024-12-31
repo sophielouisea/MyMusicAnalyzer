@@ -255,7 +255,7 @@ body {
   background-color: #836eff;
   width: 700px;
   padding: 20px;
-  box-shadow: 0 0 0 50vmax rgba(0, 0, 0, .5);
+  box-shadow: 0 0 0 50vmax rgba(0, 0, 0, 0.5);
 }
 .summary-card {
   background-color: #836eff;
