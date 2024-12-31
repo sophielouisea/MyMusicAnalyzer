@@ -8,20 +8,10 @@ const Header = (): React.JSX.Element => {
     (state: RootState) => state.userSession.data.userName,
   );
 
-  const handleLogout = async () => {
-    await window.localStorage.removeItem("spotifyToken");
-    await window.localStorage.removeItem("spotifyTokenExpiry");
-    location.reload();
-    return true;
-  };
-
   return (
     <header className="header">
       <h1>My Music Analyser</h1>
-      {/* <Tooltip target=".header-user-button" /> */}
-      <button className="logout-button" onClick={() => handleLogout()}>
-        Refresh
-      </button>
+      <Tooltip target=".header-user-button" />
       <div
         className="header-user-button"
         data-pr-tooltip={userName || ""}

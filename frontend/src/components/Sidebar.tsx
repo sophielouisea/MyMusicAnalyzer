@@ -1,5 +1,8 @@
 import { AppDispatch, RootState } from "@/state/store";
-import { setTimeRangeView, setVisibleDownloadSummaryModal } from "@/state/viewsSlice";
+import {
+  setTimeRangeView,
+  setVisibleDownloadSummaryModal,
+} from "@/state/viewsSlice";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -13,10 +16,9 @@ const Sidebar = (): React.JSX.Element => {
       : "sidebar-button";
   };
 
-  // TODO: implement summary download
   return (
     <div className="sidebar">
-      <div style={{fontSize: "16px"}}>
+      <div style={{ fontSize: "16px" }}>
         <button
           className={getClassName("short_term")}
           onClick={() => {
@@ -44,7 +46,9 @@ const Sidebar = (): React.JSX.Element => {
       </div>
       <button
         className="download-summary"
-        onClick={() => {dispatch(setVisibleDownloadSummaryModal(true))}}
+        onClick={() => {
+          dispatch(setVisibleDownloadSummaryModal(true));
+        }}
       >
         Download summary
       </button>

@@ -13,7 +13,7 @@ const initialState: SliceInitialState = {
 
 export const getDecades = createAsyncThunk(
   "decadesSlice/getDecades",
-  async (arg, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     const token = await window.localStorage.getItem("spotifyToken");
     if (token) {
       const requestConfig = {

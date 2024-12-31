@@ -10,7 +10,6 @@ type CardProps = {
 };
 
 const TopItems = ({ items, numItems = 20 }: CardProps): React.JSX.Element => {
-
   const renderItem = (item: ArtistItem | TrackItem) => {
     return (
       <>

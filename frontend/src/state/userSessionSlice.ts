@@ -71,7 +71,7 @@ export const authenticateUser = createAsyncThunk(
 
 export const getUserDetails = createAsyncThunk(
   "userSessionSlice/getUserDetails",
-  async (arg, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     console.log("Getting user details...");
     const token = await window.localStorage.getItem("spotifyToken");
     if (token) {

@@ -13,18 +13,13 @@ export const viewsSlice = createSlice({
     ) => {
       state.timeRange = action.payload;
     },
-    setVisibleDownloadSummaryModal: (
-      state,
-      action: PayloadAction<boolean>,
-    ) => {
+    setVisibleDownloadSummaryModal: (state, action: PayloadAction<boolean>) => {
       state.visibleDownloadSummaryModal = action.payload;
     },
   },
 });
 
-export const {
-  setTimeRangeView,
-  setVisibleDownloadSummaryModal
-} = viewsSlice.actions;
+export const { setTimeRangeView, setVisibleDownloadSummaryModal } =
+  viewsSlice.actions;
 
 export default viewsSlice.reducer;

@@ -7,11 +7,7 @@ import { AppDispatch } from "@/state/store";
 import { ProgressSpinner } from "primereact/progressspinner";
 
 type Props = {
-  children:
-    | string
-    | React.JSX.Element
-    | React.JSX.Element[]
-    | (() => React.JSX.Element);
+  children: React.ReactNode;
 };
 
 function AuthProvider({ children }: Props): React.JSX.Element {
